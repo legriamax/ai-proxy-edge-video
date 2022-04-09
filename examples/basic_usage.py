@@ -28,4 +28,24 @@ def send_list_stream_request(stub):
         yield stream_resp
 
 
-def gen_ima
+def gen_image_request(device_name, keyframe_only):
+    """ Create an object to request a video frame """
+
+
+    req = video_streaming_pb2.VideoFrameRequest()
+    req.device_id = device_name
+    req.key_frame_only = keyframe_only
+    return req
+
+
+if __name__ == "__main__":
+    # Initialize parser 
+    parser = argparse.ArgumentParser(description='Chrysalis Edge Proxy Basic Example')
+    parser.add_argument("--list", action='store_true')
+    parser.add_argument("--device", type=str, default=None, required=False)
+
+    args = parser.parse_args()
+    
+    # grpc connection to video-edge-ai-proxy
+    options = [('grpc.max_receive_message_length', 50 * 1024 * 1024)]
+    channel = grpc.insecure_channel('127.0.0.1:
