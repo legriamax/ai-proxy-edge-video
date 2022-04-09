@@ -36,4 +36,19 @@ def annotate(stub, device_name, event_type):
 
 if __name__ == "__main__":
     # Initialize parser 
-    parser = argp
+    parser = argparse.ArgumentParser(description='Chrysalis Edge Proxy Basic Example')
+    parser.add_argument("--device", type=str, default=None, required=True)
+    parser.add_argument("--type", type=str, default=None, required=True)
+
+    args = parser.parse_args()
+    
+    # grpc connection to video-edge-ai-proxy
+    channel = grpc.insecure_channel('127.0.0.1:50001')
+    stub = video_streaming_pb2_grpc.ImageStub(channel)
+
+    # send annotation
+    annotate(stub, args.device, args.type)
+
+
+
+
