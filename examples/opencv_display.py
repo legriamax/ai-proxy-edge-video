@@ -68,3 +68,18 @@ if __name__ == "__main__":
         if frame is not None:
             img_bytes = frame.data 
             re_img = np.frombuffer(img_bytes, dtype=np.uint8)
+
+            # reshape image back into original dimensions
+            if len(frame.shape.dim) > 0:
+                reshape = tuple([int(dim.size) for dim in frame.shape.dim])
+                re_img = np.reshape(re_img, reshape)
+
+                # # display image
+                cv2.imshow('box', re_img)
+                
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+        
+        # delay by assumed fps rate
+        delay = 1 / aproxFps
+        time.sleep(delay)
