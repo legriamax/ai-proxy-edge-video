@@ -45,4 +45,20 @@ if __name__ == "__main__":
 
     # processing everything in the in-memory buffer
 
-    # grpc connection to video-edge-ai-pr
+    # grpc connection to video-edge-ai-proxy
+    options = [('grpc.max_receive_message_length', 50 * 1024 * 1024)]
+    channel = grpc.insecure_channel('127.0.0.1:50001', options=options)
+    stub = video_streaming_pb2_grpc.ImageStub(channel)
+
+    # first get the system time (not necessary but sure to be more precise on different systems)
+    sysTime = stub.SystemTime(video_streaming_pb2.SystemTimeRequest())
+    timestampTo = sysTime.current_time
+    timestampFrom = 0 # beginning of the in-memory queue
+
+    num_images = 0
+    start_time = int(time.time() * 1000)
+    images_found = False
+
+    for frame in stub.VideoBufferedImage(gen_buffered_image_request(device_name=device_id,timestamp_from=timestampFrom, timestamp_to=timestampTo)):
+        # read raw frame data and convert to numpy array
+        img_by
