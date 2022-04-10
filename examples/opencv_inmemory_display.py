@@ -16,4 +16,33 @@
 import grpc
 from numpy.lib.function_base import append
 import video_streaming_pb2_grpc, video_streaming_pb2
-impor
+import argparse
+import cv2
+import numpy as np
+import time
+import os
+import threading
+import sys
+
+# create in-memory buffer gRPC request
+def gen_buffered_image_request(device_name, timestamp_from, timestamp_to):
+    """ Create an object to request a video frame """
+
+
+    req = video_streaming_pb2.VideoFrameBufferedRequest()
+    req.device_id = device_name
+    req.timestamp_from = timestamp_from
+    req.timestamp_to = timestamp_to
+    return req
+
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Chrysalis Edge buffered images example')
+    parser.add_argument("--device", type=str, default=None, required=True)
+    args = parser.parse_args()
+    device_id = args.device
+
+    # processing everything in the in-memory buffer
+
+    # grpc connection to video-edge-ai-pr
