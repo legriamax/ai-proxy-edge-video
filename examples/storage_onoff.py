@@ -29,4 +29,26 @@ def storage(stub, device_name, onoff=False):
         resp = stub.Storage(storage_request)
         print(resp)
     except grpc.RpcError as rpc_error_call:
-        print("start proxy failed with", rpc_error_call.code(), rpc_err
+        print("start proxy failed with", rpc_error_call.code(), rpc_error_call.details())
+
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+if __name__ == "__main__":
+    # Initialize parser 
+    parser = argparse.ArgumentParser(description='Chrysalis Edge Proxy Storage Example')
+    parser.add_argument("--device", type=str, default=None, required=True)
+    parser.add_argument("--on", type=str2bool, default=None, required=True)
+
+    args = parser.parse_args()
+    
+    # grpc connection to video-edge-ai-proxy
+    channel = grpc.insecure_channel('127.0.0.1:50001')
+  
