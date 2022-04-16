@@ -51,4 +51,7 @@ if __name__ == "__main__":
     
     # grpc connection to video-edge-ai-proxy
     channel = grpc.insecure_channel('127.0.0.1:50001')
-  
+    stub = video_streaming_pb2_grpc.ImageStub(channel)
+
+    # send annotation
+    storage(stub, args.device, args.on)
