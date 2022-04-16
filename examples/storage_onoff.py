@@ -7,4 +7,26 @@
 #    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is dis
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import grpc
+import video_streaming_pb2_grpc, video_streaming_pb2
+import argparse
+import time
+
+
+def storage(stub, device_name, onoff=False):
+    """ Enabling or disabling storage on live RTMP stream """
+
+
+    storage_request = video_streaming_pb2.StorageRequest()
+    storage_request.device_id = device_name
+    storage_request.start = onoff
+    try:
+        resp = stub.Storage(storage_request)
+        print(resp)
+    except grpc.RpcError as rpc_error_call:
+        print("start proxy failed with", rpc_error_call.code(), rpc_err
