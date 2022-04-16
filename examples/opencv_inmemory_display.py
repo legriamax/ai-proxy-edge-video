@@ -82,4 +82,7 @@ if __name__ == "__main__":
     if images_found: # don't destroy window if nothing ever displayed
         end_time = int(time.time() * 1000)
 
-        print("Total execution time:", str(end_time - start_tim
+        print("Total execution time:", str(end_time - start_time), ": ", (end_time - start_time), "ms", "[Start:End] -> [", str(timestampFrom), ":", str(timestampTo), "]", "#images: ", num_images)
+    else:
+        print("no results found between ", timestampFrom, ",", timestampTo)
+    pass
