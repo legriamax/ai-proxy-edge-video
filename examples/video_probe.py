@@ -20,3 +20,12 @@ if __name__ == "__main__":
     parser.add_argument("--device", type=str, default=None, required=True)
     args = parser.parse_args()
     device_id = args.device
+    
+    channel = grpc.insecure_channel('127.0.0.1:50001')
+    stub = video_streaming_pb2_grpc.ImageStub(channel)
+
+    probe = stub.VideoProbe(gen_buffer_probe_request(device_name=device_id))
+    print(probe)
+
+    sysTime = stub.SystemTime(gen_system_time_request())
+    print(sysTime)
