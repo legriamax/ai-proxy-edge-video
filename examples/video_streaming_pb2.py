@@ -1165,3 +1165,418 @@ _VIDEOPROBERESPONSE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2450,
+  serialized_end=2604,
+)
+
+
+_VIDEOBUFFER = _descriptor.Descriptor(
+  name='VideoBuffer',
+  full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='start_time', full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer.start_time', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='end_time', full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer.end_time', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='duration_seconds', full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer.duration_seconds', index=2,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='approximate_fps', full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer.approximate_fps', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='frames', full_name='chrys.cloud.videostreaming.v1beta1.VideoBuffer.frames', index=4,
+      number=5, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2606,
+  serialized_end=2724,
+)
+
+
+_SYSTEMTIMERESPONSE = _descriptor.Descriptor(
+  name='SystemTimeResponse',
+  full_name='chrys.cloud.videostreaming.v1beta1.SystemTimeResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='current_time', full_name='chrys.cloud.videostreaming.v1beta1.SystemTimeResponse.current_time', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2726,
+  serialized_end=2768,
+)
+
+
+_SYSTEMTIMEREQUEST = _descriptor.Descriptor(
+  name='SystemTimeRequest',
+  full_name='chrys.cloud.videostreaming.v1beta1.SystemTimeRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2770,
+  serialized_end=2789,
+)
+
+_ANNOTATEREQUEST.fields_by_name['object_bouding_box'].message_type = _BOUDINGBOX
+_ANNOTATEREQUEST.fields_by_name['location'].message_type = _LOCATION
+_ANNOTATEREQUEST.fields_by_name['object_coordinate'].message_type = _COORDINATE
+_ANNOTATEREQUEST.fields_by_name['mask'].message_type = _COORDINATE
+_SHAPEPROTO_DIM.containing_type = _SHAPEPROTO
+_SHAPEPROTO.fields_by_name['dim'].message_type = _SHAPEPROTO_DIM
+_VIDEOFRAME.fields_by_name['shape'].message_type = _SHAPEPROTO
+_VIDEOPROBERESPONSE.fields_by_name['video_codec'].message_type = _VIDEOCODEC
+_VIDEOPROBERESPONSE.fields_by_name['buffer'].message_type = _VIDEOBUFFER
+DESCRIPTOR.message_types_by_name['AnnotateRequest'] = _ANNOTATEREQUEST
+DESCRIPTOR.message_types_by_name['AnnotateResponse'] = _ANNOTATERESPONSE
+DESCRIPTOR.message_types_by_name['Location'] = _LOCATION
+DESCRIPTOR.message_types_by_name['Coordinate'] = _COORDINATE
+DESCRIPTOR.message_types_by_name['BoudingBox'] = _BOUDINGBOX
+DESCRIPTOR.message_types_by_name['ShapeProto'] = _SHAPEPROTO
+DESCRIPTOR.message_types_by_name['VideoFrame'] = _VIDEOFRAME
+DESCRIPTOR.message_types_by_name['VideoFrameRequest'] = _VIDEOFRAMEREQUEST
+DESCRIPTOR.message_types_by_name['VideoFrameBufferedRequest'] = _VIDEOFRAMEBUFFEREDREQUEST
+DESCRIPTOR.message_types_by_name['ListStream'] = _LISTSTREAM
+DESCRIPTOR.message_types_by_name['ListStreamRequest'] = _LISTSTREAMREQUEST
+DESCRIPTOR.message_types_by_name['ProxyRequest'] = _PROXYREQUEST
+DESCRIPTOR.message_types_by_name['ProxyResponse'] = _PROXYRESPONSE
+DESCRIPTOR.message_types_by_name['StorageRequest'] = _STORAGEREQUEST
+DESCRIPTOR.message_types_by_name['StorageResponse'] = _STORAGERESPONSE
+DESCRIPTOR.message_types_by_name['VideoCodec'] = _VIDEOCODEC
+DESCRIPTOR.message_types_by_name['VideoProbeRequest'] = _VIDEOPROBEREQUEST
+DESCRIPTOR.message_types_by_name['VideoProbeResponse'] = _VIDEOPROBERESPONSE
+DESCRIPTOR.message_types_by_name['VideoBuffer'] = _VIDEOBUFFER
+DESCRIPTOR.message_types_by_name['SystemTimeResponse'] = _SYSTEMTIMERESPONSE
+DESCRIPTOR.message_types_by_name['SystemTimeRequest'] = _SYSTEMTIMEREQUEST
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+AnnotateRequest = _reflection.GeneratedProtocolMessageType('AnnotateRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ANNOTATEREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.AnnotateRequest)
+  })
+_sym_db.RegisterMessage(AnnotateRequest)
+
+AnnotateResponse = _reflection.GeneratedProtocolMessageType('AnnotateResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ANNOTATERESPONSE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.AnnotateResponse)
+  })
+_sym_db.RegisterMessage(AnnotateResponse)
+
+Location = _reflection.GeneratedProtocolMessageType('Location', (_message.Message,), {
+  'DESCRIPTOR' : _LOCATION,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.Location)
+  })
+_sym_db.RegisterMessage(Location)
+
+Coordinate = _reflection.GeneratedProtocolMessageType('Coordinate', (_message.Message,), {
+  'DESCRIPTOR' : _COORDINATE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.Coordinate)
+  })
+_sym_db.RegisterMessage(Coordinate)
+
+BoudingBox = _reflection.GeneratedProtocolMessageType('BoudingBox', (_message.Message,), {
+  'DESCRIPTOR' : _BOUDINGBOX,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.BoudingBox)
+  })
+_sym_db.RegisterMessage(BoudingBox)
+
+ShapeProto = _reflection.GeneratedProtocolMessageType('ShapeProto', (_message.Message,), {
+
+  'Dim' : _reflection.GeneratedProtocolMessageType('Dim', (_message.Message,), {
+    'DESCRIPTOR' : _SHAPEPROTO_DIM,
+    '__module__' : 'video_streaming_pb2'
+    # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ShapeProto.Dim)
+    })
+  ,
+  'DESCRIPTOR' : _SHAPEPROTO,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ShapeProto)
+  })
+_sym_db.RegisterMessage(ShapeProto)
+_sym_db.RegisterMessage(ShapeProto.Dim)
+
+VideoFrame = _reflection.GeneratedProtocolMessageType('VideoFrame', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOFRAME,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoFrame)
+  })
+_sym_db.RegisterMessage(VideoFrame)
+
+VideoFrameRequest = _reflection.GeneratedProtocolMessageType('VideoFrameRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOFRAMEREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoFrameRequest)
+  })
+_sym_db.RegisterMessage(VideoFrameRequest)
+
+VideoFrameBufferedRequest = _reflection.GeneratedProtocolMessageType('VideoFrameBufferedRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOFRAMEBUFFEREDREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoFrameBufferedRequest)
+  })
+_sym_db.RegisterMessage(VideoFrameBufferedRequest)
+
+ListStream = _reflection.GeneratedProtocolMessageType('ListStream', (_message.Message,), {
+  'DESCRIPTOR' : _LISTSTREAM,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ListStream)
+  })
+_sym_db.RegisterMessage(ListStream)
+
+ListStreamRequest = _reflection.GeneratedProtocolMessageType('ListStreamRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTSTREAMREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ListStreamRequest)
+  })
+_sym_db.RegisterMessage(ListStreamRequest)
+
+ProxyRequest = _reflection.GeneratedProtocolMessageType('ProxyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PROXYREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ProxyRequest)
+  })
+_sym_db.RegisterMessage(ProxyRequest)
+
+ProxyResponse = _reflection.GeneratedProtocolMessageType('ProxyResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PROXYRESPONSE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.ProxyResponse)
+  })
+_sym_db.RegisterMessage(ProxyResponse)
+
+StorageRequest = _reflection.GeneratedProtocolMessageType('StorageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _STORAGEREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.StorageRequest)
+  })
+_sym_db.RegisterMessage(StorageRequest)
+
+StorageResponse = _reflection.GeneratedProtocolMessageType('StorageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _STORAGERESPONSE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.StorageResponse)
+  })
+_sym_db.RegisterMessage(StorageResponse)
+
+VideoCodec = _reflection.GeneratedProtocolMessageType('VideoCodec', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOCODEC,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoCodec)
+  })
+_sym_db.RegisterMessage(VideoCodec)
+
+VideoProbeRequest = _reflection.GeneratedProtocolMessageType('VideoProbeRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOPROBEREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoProbeRequest)
+  })
+_sym_db.RegisterMessage(VideoProbeRequest)
+
+VideoProbeResponse = _reflection.GeneratedProtocolMessageType('VideoProbeResponse', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOPROBERESPONSE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoProbeResponse)
+  })
+_sym_db.RegisterMessage(VideoProbeResponse)
+
+VideoBuffer = _reflection.GeneratedProtocolMessageType('VideoBuffer', (_message.Message,), {
+  'DESCRIPTOR' : _VIDEOBUFFER,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.VideoBuffer)
+  })
+_sym_db.RegisterMessage(VideoBuffer)
+
+SystemTimeResponse = _reflection.GeneratedProtocolMessageType('SystemTimeResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SYSTEMTIMERESPONSE,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.SystemTimeResponse)
+  })
+_sym_db.RegisterMessage(SystemTimeResponse)
+
+SystemTimeRequest = _reflection.GeneratedProtocolMessageType('SystemTimeRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SYSTEMTIMEREQUEST,
+  '__module__' : 'video_streaming_pb2'
+  # @@protoc_insertion_point(class_scope:chrys.cloud.videostreaming.v1beta1.SystemTimeRequest)
+  })
+_sym_db.RegisterMessage(SystemTimeRequest)
+
+
+
+_IMAGE = _descriptor.ServiceDescriptor(
+  name='Image',
+  full_name='chrys.cloud.videostreaming.v1beta1.Image',
+  file=DESCRIPTOR,
+  index=0,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=2792,
+  serialized_end=3789,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='VideoLatestImage',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.VideoLatestImage',
+    index=0,
+    containing_service=None,
+    input_type=_VIDEOFRAMEREQUEST,
+    output_type=_VIDEOFRAME,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='VideoBufferedImage',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.VideoBufferedImage',
+    index=1,
+    containing_service=None,
+    input_type=_VIDEOFRAMEBUFFEREDREQUEST,
+    output_type=_VIDEOFRAME,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='VideoProbe',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.VideoProbe',
+    index=2,
+    containing_service=None,
+    input_type=_VIDEOPROBEREQUEST,
+    output_type=_VIDEOPROBERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListStreams',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.ListStreams',
+    index=3,
+    containing_service=None,
+    input_type=_LISTSTREAMREQUEST,
+    output_type=_LISTSTREAM,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Annotate',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.Annotate',
+    index=4,
+    containing_service=None,
+    input_type=_ANNOTATEREQUEST,
+    output_type=_ANNOTATERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Proxy',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.Proxy',
+    index=5,
+    containing_service=None,
+    input_type=_PROXYREQUEST,
+    output_type=_PROXYRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Storage',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.Storage',
+    index=6,
+    containing_service=None,
+    input_type=_STORAGEREQUEST,
+    output_type=_STORAGERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SystemTime',
+    full_name='chrys.cloud.videostreaming.v1beta1.Image.SystemTime',
+    index=7,
+    containing_service=None,
+    input_type=_SYSTEMTIMEREQUEST,
+    output_type=_SYSTEMTIMERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_IMAGE)
+
+DESCRIPTOR.services_by_name['Image'] = _IMAGE
+
+# @@protoc_insertion_point(module_scope)
