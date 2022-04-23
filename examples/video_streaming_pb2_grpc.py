@@ -24,4 +24,15 @@ class ImageStub(object):
                 request_serializer=video__streaming__pb2.VideoFrameBufferedRequest.SerializeToString,
                 response_deserializer=video__streaming__pb2.VideoFrame.FromString,
                 )
-        self.VideoProbe = channe
+        self.VideoProbe = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/VideoProbe',
+                request_serializer=video__streaming__pb2.VideoProbeRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.VideoProbeResponse.FromString,
+                )
+        self.ListStreams = channel.unary_stream(
+                '/chrys.cloud.videostreaming.v1beta1.Image/ListStreams',
+                request_serializer=video__streaming__pb2.ListStreamRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.ListStream.FromString,
+                )
+        self.Annotate = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/Annot
