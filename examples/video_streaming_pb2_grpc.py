@@ -110,4 +110,16 @@ class ImageServicer(object):
 
 def add_ImageServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'VideoLatestImage': 
+            'VideoLatestImage': grpc.unary_unary_rpc_method_handler(
+                    servicer.VideoLatestImage,
+                    request_deserializer=video__streaming__pb2.VideoFrameRequest.FromString,
+                    response_serializer=video__streaming__pb2.VideoFrame.SerializeToString,
+            ),
+            'VideoBufferedImage': grpc.unary_stream_rpc_method_handler(
+                    servicer.VideoBufferedImage,
+                    request_deserializer=video__streaming__pb2.VideoFrameBufferedRequest.FromString,
+                    response_serializer=video__streaming__pb2.VideoFrame.SerializeToString,
+            ),
+            'VideoProbe': grpc.unary_unary_rpc_method_handler(
+                    servicer.VideoProbe,
+                    request_des
