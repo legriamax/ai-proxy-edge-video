@@ -146,4 +146,23 @@ def add_ImageServicer_to_server(servicer, server):
                     response_serializer=video__streaming__pb2.StorageResponse.SerializeToString,
             ),
             'SystemTime': grpc.unary_unary_rpc_method_handler(
-                    
+                    servicer.SystemTime,
+                    request_deserializer=video__streaming__pb2.SystemTimeRequest.FromString,
+                    response_serializer=video__streaming__pb2.SystemTimeResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'chrys.cloud.videostreaming.v1beta1.Image', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class Image(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def VideoLatestImage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_creden
