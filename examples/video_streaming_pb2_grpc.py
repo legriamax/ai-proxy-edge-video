@@ -238,4 +238,22 @@ class Image(object):
             compression=None,
             wait_for_ready=None,
             timeout=None,
- 
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/chrys.cloud.videostreaming.v1beta1.Image/Annotate',
+            video__streaming__pb2.AnnotateRequest.SerializeToString,
+            video__streaming__pb2.AnnotateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Proxy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, ta
