@@ -217,4 +217,25 @@ class Image(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
-            ins
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/chrys.cloud.videostreaming.v1beta1.Image/ListStreams',
+            video__streaming__pb2.ListStreamRequest.SerializeToString,
+            video__streaming__pb2.ListStream.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Annotate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+ 
