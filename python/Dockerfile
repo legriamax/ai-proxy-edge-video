@@ -17,4 +17,21 @@ RUN apt-get install -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh -O ~/mini
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+
+# creating conda environment
+COPY environment.yml / 
+RUN conda env create -f environment.yml
+
+RUN mkdir /proto
+COPY proto/ /proto/
+COPY rtsp_to_rtmp.py start.sh global_vars.py read_image.py archive.py disk_cleanup.py inmemory_buffer.py /
+
+RUN chmod +x /start.sh
+
+ENTRYPOINT ["./start.sh"]
