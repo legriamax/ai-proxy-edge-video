@@ -99,4 +99,8 @@ class StoreMP4VideoChunks(threading.Thread):
             # if (p.stream.type == "audio") and self.in_audio_stream:
             #     p.stream = output_audio_stream
             #     output.mux(p)
-            # print ("POS
+            # print ("POST ", p, p.dts, p.pts, p.stream.type)
+
+
+        
+        output.close()
