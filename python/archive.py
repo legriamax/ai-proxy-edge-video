@@ -44,4 +44,27 @@ class StoreMP4VideoChunks(threading.Thread):
         pass
 
     def saveToMp4(self, packet_store, start_timestamp):
-        minimum_dts = -
+        minimum_dts = -1
+        maximum_dts = 0
+
+        hasDuration = False
+        segment_length = 0.0
+        time_base = 0
+
+        for _,p in enumerate(packet_store):
+            sec = float(p.duration * p.stream.time_base) 
+            if p.duration > 0:
+                hasDuration = True
+                segment_length += sec
+
+            else:
+                # calculation for some "older" cameras, that don't send duration in the packets
+                if minimum_dts < 0:
+                    minimum_dts = p.dts
+            
+                minimum_dts = min(minimum_dts, p.dts)
+                maximum_dts = max(maximum_dts, p.dts)
+                time_base = p.stream.time_base
+
+        if not hasDuration:
+         
