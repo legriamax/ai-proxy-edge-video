@@ -23,4 +23,25 @@ class StoreMP4VideoChunks(threading.Thread):
 
     def __init__(self, queue=None, path=None, device_id=None, video_stream=None, audio_stream=None):
         threading.Thread.__init__(self) 
-       
+        self.in_video_stream = video_stream
+        self.in_audio_stream = audio_stream
+        self.path = os.path.join(path, '') + device_id
+        self.device_id = device_id
+        self.q = queue
+        if not os.path.exists(self.path):
+            os.makedirs(self.path)
+    
+    def run(self):
+        while True:
+            try:
+                archive_group = self.q.get(timeout=5) # 5s timeout
+                # print(archive_group.packet_group, archive_group.start_timestamp)
+                self.saveToMp4(archive_group.packet_group, archive_group.start_timestamp)
+            except queue.Empty:
+                continue
+
+            self.q.task_done()
+        pass
+
+    def saveToMp4(self, packet_store, start_timestamp):
+        minimum_dts = -
