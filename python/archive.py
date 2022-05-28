@@ -80,4 +80,23 @@ class StoreMP4VideoChunks(threading.Thread):
             # output_audio_stream = output.add_stream(template=self.in_audio_stream) 
 
         for _,p in enumerate(packet_store):
-       
+            p.dts -= minimum_dts
+            p.pts -= minimum_dts
+            # print(p.dts, p.pts)
+
+        for _,p in enumerate(packet_store):
+            # print ("PRE ", p, p.dts, p.pts, p.stream.type)
+            if (p.stream.type == "video"):
+                if p.dts is None:
+                    continue
+
+                p.stream = output_video_stream
+                try:
+                    output.mux(p)            
+                except:
+                    print("dts invalid probably")
+                    continue
+            # if (p.stream.type == "audio") and self.in_audio_stream:
+            #     p.stream = output_audio_stream
+            #     output.mux(p)
+            # print ("POS
