@@ -67,4 +67,17 @@ class StoreMP4VideoChunks(threading.Thread):
                 time_base = p.stream.time_base
 
         if not hasDuration:
-         
+            # calculate segment_length with time_base from a cam that has no duration info in stream 
+            segment_length = (maximum_dts - minimum_dts) * time_base
+
+        segment_length = int(segment_length * 1000) # convert to milliseconds
+
+        output_file_name = self.path + "/" + str(start_timestamp) + "_" + str(segment_length) + ".mp4"
+        output = av.open(output_file_name, format="mp4", mode='w')
+        output_video_stream = output.add_stream(template=self.in_video_stream) 
+        if self.in_audio_stream:
+            print(self.in_audio_stream)
+            # output_audio_stream = output.add_stream(template=self.in_audio_stream) 
+
+        for _,p in enumerate(packet_store):
+       
