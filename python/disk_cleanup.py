@@ -34,4 +34,21 @@ class CleanupScheduler(threading.Thread):
     def convert_to_seconds(self, s):
         return int(timedelta(**{
             self.__units.get(m.group('unit').lower(), 'seconds'): int(m.group('val'))
-            for m in re.
+            for m in re.finditer(r'(?P<val>\d+)(?P<unit>[smhdw]?)', s, flags=re.I)
+        }).total_seconds())
+
+    def remove_mp4_files(self):
+        try:
+            now = int(time.time() * 1000)
+            remove_older_than = now - (self.__delay_seconds * 1000)
+
+            # print("removing older mp4 files", self.__folder + "/" + self.__device, datetime.utcfromtimestamp(remove_older_than/1000).strftime('%Y-%m-%d %H:%M:%S'))
+            files = os.listdir(self.__folder + "/" + self.__device)
+
+            if len(files) > 0:
+                for f in files:
+                    splitted =  f.split("_")
+                    if len(splitted) == 2:
+                        file_timestamp = int(splitted[0])
+                        if file_timestamp < remove_older_than:
+     
