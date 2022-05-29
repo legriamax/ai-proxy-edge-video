@@ -16,4 +16,22 @@ import time
 import os
 import threading
 import sched
-from datetime import 
+from datetime import timedelta, datetime
+import re
+
+class CleanupScheduler(threading.Thread):
+
+    def __init__(self, folder, device, remove_older_than):
+        threading.Thread.__init__(self)
+        self.__folder = folder
+        self.__device = device
+        self.__remove_older_than = remove_older_than
+        self.__scheduler = sched.scheduler(time.time, time.sleep)
+        self.__units = {'s':'seconds', 'm':'minutes', 'h':'hours', 'd':'days', 'w':'weeks'}
+
+        self.__delay_seconds = self.convert_to_seconds(remove_older_than)
+
+    def convert_to_seconds(self, s):
+        return int(timedelta(**{
+            self.__units.get(m.group('unit').lower(), 'seconds'): int(m.group('val'))
+            for m in re.
