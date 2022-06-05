@@ -47,4 +47,20 @@ class ImageStub(object):
         self.Storage = channel.unary_unary(
                 '/chrys.cloud.videostreaming.v1beta1.Image/Storage',
                 request_serializer=video__streaming__pb2.StorageRequest.SerializeToString,
-                response_de
+                response_deserializer=video__streaming__pb2.StorageResponse.FromString,
+                )
+        self.SystemTime = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/SystemTime',
+                request_serializer=video__streaming__pb2.SystemTimeRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.SystemTimeResponse.FromString,
+                )
+
+
+class ImageServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def VideoLatestImage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise
