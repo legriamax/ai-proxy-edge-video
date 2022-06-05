@@ -36,4 +36,15 @@ class ImageStub(object):
                 )
         self.Annotate = channel.unary_unary(
                 '/chrys.cloud.videostreaming.v1beta1.Image/Annotate',
-                reques
+                request_serializer=video__streaming__pb2.AnnotateRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.AnnotateResponse.FromString,
+                )
+        self.Proxy = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/Proxy',
+                request_serializer=video__streaming__pb2.ProxyRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.ProxyResponse.FromString,
+                )
+        self.Storage = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/Storage',
+                request_serializer=video__streaming__pb2.StorageRequest.SerializeToString,
+                response_de
