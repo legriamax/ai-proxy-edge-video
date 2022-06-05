@@ -12,4 +12,17 @@ class ImageStub(object):
         """Constructor.
 
         Args:
-         
+            channel: A grpc.Channel.
+        """
+        self.VideoLatestImage = channel.unary_unary(
+                '/chrys.cloud.videostreaming.v1beta1.Image/VideoLatestImage',
+                request_serializer=video__streaming__pb2.VideoFrameRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.VideoFrame.FromString,
+                )
+        self.VideoBufferedImage = channel.unary_stream(
+                '/chrys.cloud.videostreaming.v1beta1.Image/VideoBufferedImage',
+                request_serializer=video__streaming__pb2.VideoFrameBufferedRequest.SerializeToString,
+                response_deserializer=video__streaming__pb2.VideoFrame.FromString,
+                )
+        self.VideoProbe = channel.unary_unary(
+                '/
