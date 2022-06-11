@@ -135,4 +135,15 @@ def add_ImageServicer_to_server(servicer, server):
                     request_deserializer=video__streaming__pb2.AnnotateRequest.FromString,
                     response_serializer=video__streaming__pb2.AnnotateResponse.SerializeToString,
             ),
-         
+            'Proxy': grpc.unary_unary_rpc_method_handler(
+                    servicer.Proxy,
+                    request_deserializer=video__streaming__pb2.ProxyRequest.FromString,
+                    response_serializer=video__streaming__pb2.ProxyResponse.SerializeToString,
+            ),
+            'Storage': grpc.unary_unary_rpc_method_handler(
+                    servicer.Storage,
+                    request_deserializer=video__streaming__pb2.StorageRequest.FromString,
+                    response_serializer=video__streaming__pb2.StorageResponse.SerializeToString,
+            ),
+            'SystemTime': grpc.unary_unary_rpc_method_handler(
+                    serv
