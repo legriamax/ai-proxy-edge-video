@@ -123,4 +123,16 @@ def add_ImageServicer_to_server(servicer, server):
             'VideoProbe': grpc.unary_unary_rpc_method_handler(
                     servicer.VideoProbe,
                     request_deserializer=video__streaming__pb2.VideoProbeRequest.FromString,
-            
+                    response_serializer=video__streaming__pb2.VideoProbeResponse.SerializeToString,
+            ),
+            'ListStreams': grpc.unary_stream_rpc_method_handler(
+                    servicer.ListStreams,
+                    request_deserializer=video__streaming__pb2.ListStreamRequest.FromString,
+                    response_serializer=video__streaming__pb2.ListStream.SerializeToString,
+            ),
+            'Annotate': grpc.unary_unary_rpc_method_handler(
+                    servicer.Annotate,
+                    request_deserializer=video__streaming__pb2.AnnotateRequest.FromString,
+                    response_serializer=video__streaming__pb2.AnnotateResponse.SerializeToString,
+            ),
+         
