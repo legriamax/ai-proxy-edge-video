@@ -184,4 +184,22 @@ class Image(object):
             channel_credentials=None,
             call_credentials=None,
             insecure=False,
-            compres
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/chrys.cloud.videostreaming.v1beta1.Image/VideoBufferedImage',
+            video__streaming__pb2.VideoFrameBufferedRequest.SerializeToString,
+            video__streaming__pb2.VideoFrame.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def VideoProbe(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_re
