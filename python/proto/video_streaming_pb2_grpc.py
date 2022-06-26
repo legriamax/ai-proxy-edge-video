@@ -291,4 +291,7 @@ class Image(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/chrys.cloud.videostreaming.v1beta1.Image/SystemTime',
-            video__st
+            video__streaming__pb2.SystemTimeRequest.SerializeToString,
+            video__streaming__pb2.SystemTimeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
