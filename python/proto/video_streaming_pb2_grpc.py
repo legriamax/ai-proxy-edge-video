@@ -256,4 +256,21 @@ class Image(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grp
+        return grpc.experimental.unary_unary(request, target, '/chrys.cloud.videostreaming.v1beta1.Image/Proxy',
+            video__streaming__pb2.ProxyRequest.SerializeToString,
+            video__streaming__pb2.ProxyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Storage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/chrys.cloud
