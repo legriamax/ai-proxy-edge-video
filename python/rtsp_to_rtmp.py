@@ -27,4 +27,23 @@ import sys
 from archive import StoreMP4VideoChunks
 from disk_cleanup import CleanupScheduler
 from inmemory_buffer import InMemoryBuffer, packetToInMemoryBuffer, setCodecInfo,getCodecInfo, memoryCleanup
-from global_vars import query_timestamp, RedisIsKeyFrameOnlyPrefix, RedisLastAccessPref
+from global_vars import query_timestamp, RedisIsKeyFrameOnlyPrefix, RedisLastAccessPrefix, ArchivePacketGroup
+import datetime
+
+
+class RTSPtoRTMP(threading.Thread):
+
+    def __init__(self, rtsp_endpoint, rtmp_endpoint, packet_queue, device_id, disk_path, redis_conn, memory_buffer, is_decode_packets_event, lock_condition):
+        threading.Thread.__init__(self) 
+        self._packet_queue = packet_queue
+        self._disk_path = disk_path
+        self.rtsp_endpoint = rtsp_endpoint
+        self.rtmp_endpoint = rtmp_endpoint
+        self.redis_conn = redis_conn
+        self.device_id = device_id
+        self.__memory_buffer_size = memory_buffer
+        self.is_decode_packets_event = is_decode_packets_event
+        self.lock_condition = lock_condition
+        self.query_timestamp = query_timestamp
+
+    def link_nodes(self
