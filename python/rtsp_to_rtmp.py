@@ -80,4 +80,14 @@ class RTSPtoRTMP(threading.Thread):
 
         while True:
             try:
-   
+                options = {'rtsp_transport': 'tcp','stimeout': '5000000', 'max_delay': '5000000', 'use_wallclock_as_timestamps':"1", "fflags":"+genpts", 'acodec':'aac'}
+                self.in_container = av.open(self.rtsp_endpoint, options=options)
+                self.in_video_stream = self.in_container.streams.video[0]
+                self.in_audio_stream = None
+                if len(self.in_container.streams.audio) > 0:
+                    for c in self.in_container.streams.audio:
+                        print(c)
+                    # self.in_audio_stream = self.in_container.streams.audio[0]
+
+                # set codec context in redis
+                setCodecInfo(self.redis_conn, self.in_conta
