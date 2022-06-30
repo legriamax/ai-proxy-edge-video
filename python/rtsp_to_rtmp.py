@@ -46,4 +46,38 @@ class RTSPtoRTMP(threading.Thread):
         self.lock_condition = lock_condition
         self.query_timestamp = query_timestamp
 
-    def link_nodes(self
+    def link_nodes(self,*nodes):
+        for c, n in zip(nodes, nodes[1:]):
+            c.link_to(n)
+
+    def join(self):
+        threading.Thread.join(self)
+        if self.exc:
+            raise self.exc
+
+    def run(self):
+        global RedisLastAccessPrefix    
+
+        # cleanup all redis memory
+        try:
+            memoryCleanup(self.redis_conn, self.device_id)
+        except Exception as ex:
+            self.exc = ex
+            os._exit(1)
+
+        current_packet_group = []
+        flush_current_packet_group = False
+
+        # init archiving 
+        iframe_start_timestamp = 0
+        packet_group_queue = queue.Queue()
+
+        apg:ArchivePacketGroup = None
+
+        should_mux = False
+
+        last_loop_run = int(time.time() * 1000)
+
+        while True:
+            try:
+   
