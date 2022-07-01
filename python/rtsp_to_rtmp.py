@@ -107,4 +107,21 @@ class RTSPtoRTMP(threading.Thread):
             global query_timestamp
 
             if self.rtmp_endpoint is not None:
-                output = av.open(self.rtmp_endpoin
+                output = av.open(self.rtmp_endpoint, format="flv", mode='w')
+                output_video_stream = output.add_stream(template=self.in_video_stream)  
+
+            output_audio_stream = None
+            if self.in_audio_stream is not None and self.rtmp_endpoint is not None:
+                output_audio_stream = output.add_stream(template=self.in_audio_stream)
+
+
+            for packet in self.in_container.demux(self.in_video_stream):
+
+                if packet.dts is None:
+                    continue
+                
+                if packet.is_keyframe:
+                    # if we already found a keyframe previously, archive what we have
+
+                    if len(current_packet_group) > 0:
+                        packet_group = current_packe
