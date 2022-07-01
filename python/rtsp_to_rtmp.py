@@ -90,4 +90,21 @@ class RTSPtoRTMP(threading.Thread):
                     # self.in_audio_stream = self.in_container.streams.audio[0]
 
                 # set codec context in redis
-                setCodecInfo(self.redis_conn, self.in_conta
+                setCodecInfo(self.redis_conn, self.in_container, self.device_id)
+
+                # init mp4 local archive
+                if self._disk_path is not None:
+                    self._mp4archive = StoreMP4VideoChunks(queue=packet_group_queue, path=self._disk_path, device_id=self.device_id, video_stream=self.in_video_stream, audio_stream=self.in_audio_stream)
+                    self._mp4archive.daemon = True
+                    self._mp4archive.start()
+
+            except Exception as ex:
+                print("failed to connect to RTSP camera", ex)
+                self.exc = ex
+                os._exit(1)
+            
+            keyframe_found = False
+            global query_timestamp
+
+            if self.rtmp_endpoint is not None:
+                output = av.open(self.rtmp_endpoin
