@@ -124,4 +124,21 @@ class RTSPtoRTMP(threading.Thread):
                     # if we already found a keyframe previously, archive what we have
 
                     if len(current_packet_group) > 0:
-                        packet_group = current_packe
+                        packet_group = current_packet_group.copy()
+                        
+                        # send to archiver! (packet_group, iframe_start_timestamp)
+                        if self._disk_path is not None:
+                            apg = ArchivePacketGroup(packet_group, iframe_start_timestamp)
+                            packet_group_queue.put(apg)
+
+                    keyframe_found = True
+                    current_packet_group = []
+                    iframe_start_timestamp = int(round(time.time() * 1000))
+
+                if keyframe_found == False:
+                    print("skipping, since not a keyframe")
+                    continue
+
+                if keyframe_found == False:
+                    print("skipping, since not a keyframe")
+                    co
