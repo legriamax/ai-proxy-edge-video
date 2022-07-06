@@ -170,4 +170,20 @@ class RTSPtoRTMP(threading.Thread):
                     if "proxy_rtmp" in settings_dict:
                         should_mux_string = settings_dict['proxy_rtmp']
                         previous_should_mux = should_mux
-      
+                        if should_mux_string == "1":
+                            should_mux = True
+                        else:
+                            should_mux = False
+                    
+                        # check if it's time for flushing of current_packet_group 
+                        if should_mux != previous_should_mux and should_mux == True:
+                            flush_current_packet_group = True
+                        else:
+                            flush_current_packet_group = False
+                    
+                    ts = int(ts)
+                    ts_now = int(round(time.time() * 1000))
+                    diff = ts_now - ts
+                    # if no request in 10 seconds, stop
+                    if diff < 10000:
+  
