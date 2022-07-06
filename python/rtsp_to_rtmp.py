@@ -141,4 +141,20 @@ class RTSPtoRTMP(threading.Thread):
 
                 if keyframe_found == False:
                     print("skipping, since not a keyframe")
-                    co
+                    continue
+
+                # method to push packet to the redis in a in-memory buffer
+                try:
+                    packetToInMemoryBuffer(self.redis_conn, self.__memory_buffer_size, self.device_id, self.in_container, packet)
+                except Exception as ex:
+                    self.exc = ex
+                    print(ex)
+                    os._exit(1)
+
+                '''
+                Live Redis Settings
+                -------------------
+                This should be invoked only every 500 ms, This If needs to moved to it's own method
+                '''
+                # shouldn't be a problem for redis but maybe every 200ms to query for latest timestamp only
+                settings_d
