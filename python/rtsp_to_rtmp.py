@@ -186,4 +186,22 @@ class RTSPtoRTMP(threading.Thread):
                     diff = ts_now - ts
                     # if no request in 10 seconds, stop
                     if diff < 10000:
-  
+                        try:
+                            self.lock_condition.acquire()
+                            query_timestamp = ts
+                            self.lock_condition.notify_all()
+                        finally:
+                            self.lock_condition.release() 
+
+                        self.is_decode_packets_event.set()
+
+                if packet.is_keyframe:
+                    self.is_decode_packets_event.clear()
+                    self._packet_queue.queue.clear()
+                
+                
+                self._packet_queue.put(packet)
+
+                try:
+                    if self.rtmp_endpoint is not None and should_mux:
+                        # flush is neces
