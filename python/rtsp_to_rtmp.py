@@ -157,4 +157,17 @@ class RTSPtoRTMP(threading.Thread):
                 This should be invoked only every 500 ms, This If needs to moved to it's own method
                 '''
                 # shouldn't be a problem for redis but maybe every 200ms to query for latest timestamp only
-                settings_d
+                settings_dict = self.redis_conn.hgetall(RedisLastAccessPrefix + device_id)
+
+                if settings_dict is not None and len(settings_dict) > 0:
+                    settings_dict = { y.decode('utf-8'): settings_dict.get(y).decode('utf-8') for y in settings_dict.keys() } 
+                    if "last_query" in settings_dict:
+                        ts = settings_dict['last_query']
+                    else:
+                        continue
+                    
+                    # check if stream should be forwarded to Chrysalis Cloud RTMP
+                    if "proxy_rtmp" in settings_dict:
+                        should_mux_string = settings_dict['proxy_rtmp']
+                        previous_should_mux = should_mux
+      
