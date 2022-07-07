@@ -217,4 +217,23 @@ class RTSPtoRTMP(threading.Thread):
                         if packet.stream.type == "video":
                             packet.stream = output_video_stream
                             output.mux(packet)            
-                        if packet.stream.type 
+                        if packet.stream.type == "audio":
+                            if output_audio_stream is not None:
+                                packet.stream = output_audio_stream
+                                output.mux(packet)
+                except Exception as e:
+                    print("failed muxing", e)
+
+                current_packet_group.append(packet)
+            
+            time.sleep(1) # wait a second before trying to get more packets
+            print("rtsp stopped streaming...waiting for camera to reappear")
+        
+
+
+if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument("--rtsp", type=str, default=None, required=True)
+    parser.add_argument("--rtmp", type=str, default=None, required=False)
+    parser.add_argument("--device_id", type=str, default=None, required=True)
+    parse
