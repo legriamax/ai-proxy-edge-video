@@ -204,4 +204,17 @@ class RTSPtoRTMP(threading.Thread):
 
                 try:
                     if self.rtmp_endpoint is not None and should_mux:
-                        # flush is neces
+                        # flush is necessary current_packet_group (start/stop RTMP stream)
+                        if flush_current_packet_group:
+                            for p in current_packet_group:
+                                if p.stream.type == "video":
+                                    p.stream = output_video_stream
+                                    output.mux(p)
+                                if p.stream.type == "audio":
+                                    p.stream = output_audio_stream
+                                    output.mux(p)
+
+                        if packet.stream.type == "video":
+                            packet.stream = output_video_stream
+                            output.mux(packet)            
+                        if packet.stream.type 
