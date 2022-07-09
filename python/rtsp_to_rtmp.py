@@ -236,4 +236,19 @@ if __name__ == "__main__":
     parser.add_argument("--rtsp", type=str, default=None, required=True)
     parser.add_argument("--rtmp", type=str, default=None, required=False)
     parser.add_argument("--device_id", type=str, default=None, required=True)
-    parse
+    parser.add_argument("--memory_buffer", type=int, default=1, required=False)
+    parser.add_argument("--memory_scale", type=str, default="-1:-1", required=False)
+    parser.add_argument("--disk_path", type=str, default=None, required=False)
+    parser.add_argument("--disk_cleanup_rate", type=str, default=None, required=False)
+    parser.add_argument("--redis_host", type=str, default=None, required=False)
+    parser.add_argument("--redis_port", type=str, default=None, required=False)
+
+    args = parser.parse_args()
+
+    rtmp = args.rtmp
+    rtsp = args.rtsp
+    device_id = args.device_id
+    memory_buffer=args.memory_buffer
+    memory_scale=args.memory_scale
+    disk_path=args.disk_path
+    disk_cleanup_ra
