@@ -251,4 +251,26 @@ if __name__ == "__main__":
     memory_buffer=args.memory_buffer
     memory_scale=args.memory_scale
     disk_path=args.disk_path
-    disk_cleanup_ra
+    disk_cleanup_rate=args.disk_cleanup_rate
+    redis_host = args.redis_host
+    redis_port = args.redis_port
+
+    decode_packet = threading.Event()
+    lock_condition = threading.Condition()
+    
+    # print("RTPS Endpoint: ",rtsp)
+    # print("RTMP Endpoint: ", rtmp)
+    print("Device ID: ", device_id)
+    print("memory buffer: ", memory_buffer, "rescaling video: ", memory_scale)
+    print("disk path: ", disk_path)
+    print("redis host: ", redis_host)
+    print("redis port: ", redis_port)
+
+    redis_conn = None
+    try:
+        if redis_host:
+            if not redis_port:
+                redis_port = "6379"
+            
+            print("connecting to custom redis host: ", redis_host, redis_port)
+            pool = redis.ConnectionPool(host=redis_host, port=redis_port
