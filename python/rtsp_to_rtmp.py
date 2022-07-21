@@ -273,4 +273,25 @@ if __name__ == "__main__":
                 redis_port = "6379"
             
             print("connecting to custom redis host: ", redis_host, redis_port)
-            pool = redis.ConnectionPool(host=redis_host, port=redis_port
+            pool = redis.ConnectionPool(host=redis_host, port=redis_port)
+        else:
+            pool = redis.ConnectionPool(host="redis", port="6379")
+        redis_conn = redis.Redis(connection_pool=pool)
+    except Exception as ex:
+        print("failed to connect to redis instance", ex)
+        sys.exit("failed to connec to redis server")
+
+    # Test redis connection
+    ts = redis_conn.hgetall(RedisLastAccessPrefix + device_id)
+    print("last query time: ", ts)
+
+    get_images = False
+    packet_queue = queue.Queue()
+
+    th = RTSPtoRTMP(rtsp_endpoint=rtsp, 
+                    rtmp_endpoint=rtmp, 
+                    packet_queue=packet_queue, 
+                    device_id=device_id,
+                    disk_path=disk_path, 
+                    redis_conn=redis_conn, 
+                    me
