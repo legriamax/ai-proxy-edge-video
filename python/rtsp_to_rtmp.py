@@ -316,4 +316,17 @@ if __name__ == "__main__":
 
     if disk_path is not None:
         if disk_cleanup_rate is None:
-            disk_clean
+            disk_cleanup_rate = "1m"
+
+        st = CleanupScheduler(folder=disk_path, device=device_id, remove_older_than=disk_cleanup_rate)
+        st.daemon = True
+        st.start()
+
+    ri.join()
+    
+    th.join()
+
+    if disk_path is not None:
+        st.join()
+
+    inMemoryThread.join()
