@@ -294,4 +294,26 @@ if __name__ == "__main__":
                     device_id=device_id,
                     disk_path=disk_path, 
                     redis_conn=redis_conn, 
-                    me
+                    memory_buffer=memory_buffer,
+                    is_decode_packets_event=decode_packet, 
+                    lock_condition=lock_condition)
+    th.daemon = True
+    th.start()
+
+    ri = ReadImage(packet_queue=packet_queue, 
+        device_id=device_id, 
+        memory_buffer=memory_buffer,
+        redis_conn=redis_conn, 
+        is_decode_packets_event=decode_packet, 
+        lock_condition=lock_condition)
+    ri.daemon = True
+    ri.start()
+
+    # # in memory buffer
+    inMemoryThread = InMemoryBuffer(device_id=device_id, memory_scale=memory_scale, redis_conn=redis_conn)
+    inMemoryThread.daemon = True
+    inMemoryThread.start()
+
+    if disk_path is not None:
+        if disk_cleanup_rate is None:
+            disk_clean
