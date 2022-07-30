@@ -19,4 +19,31 @@ redis_port=${redis_port}
     echo "rtsp endpoint must be defined in environment variables"
     exit 1 
 fi
-if [ -z "$device_id" ]; t
+if [ -z "$device_id" ]; then 
+    echo "device_id endpoint must be defined in environment variables"
+    exit 1
+fi
+
+
+echo "Connection to rtsp camera"
+source activate chrysedgeai
+
+cmd=" -u rtsp_to_rtmp.py --rtsp $rtsp_endpoint --device_id $device_id"
+if [ ! -z "$rtmp_endpoint" ]; then 
+    cmd="$cmd --rtmp $rtmp_endpoint"
+fi
+if [ ! -z "$in_memory_buffer" ]; then
+    cmd="$cmd --memory_buffer $in_memory_buffer"
+fi
+if [ ! -z "$in_memory_scale" ]; then
+    cmd="$cmd --memory_scale $in_memory_scale"
+fi
+if [ ! -z "$disk_buffer_path" ]; then
+    cmd="$cmd --disk_path $disk_buffer_path"
+fi
+if [ ! -z "$disk_cleanup_rate" ]; then
+    cmd="$cmd --disk_cleanup_rate $disk_cleanup_rate"
+fi
+if [ ! -z "$redis_host" ]; then
+    cmd="$cmd --redis_host $redis_host"
+fi
