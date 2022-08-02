@@ -47,3 +47,13 @@ fi
 if [ ! -z "$redis_host" ]; then
     cmd="$cmd --redis_host $redis_host"
 fi
+if [ ! -z "$redis_port" ]; then
+    cmd="$cmd --redis_port $redis_port"
+fi
+
+echo "running: $cmd"
+
+python $cmd
+
+echo $?
+echo "Cant start rtsp_to_rtmp.py. Exiting..."
