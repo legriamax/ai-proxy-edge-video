@@ -42,4 +42,5 @@ func (th *testApiHandler) TestMqttDeviceStatus(c *gin.Context) {
 		return
 	}
 
-	c.Stat
+	c.Status(http.StatusOK)
+}
