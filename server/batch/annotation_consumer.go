@@ -77,4 +77,26 @@ func (ac *AnnotationConsumer) Consume(batch rmq.Deliveries) {
 		aiAnnotations = append(aiAnnotations, &aiAnnotation)
 	}
 
-	sendPayload := ai.AnnotationL
+	sendPayload := ai.AnnotationList{
+		Data: aiAnnotations,
+	}
+
+	_, apiErr := utils.CallAPIWithBody(ac.restClient, "POST", g.Conf.Annotation.Endpoint, sendPayload, apiKey, apiSecret)
+	if apiErr != nil {
+		g.Log.Error("error calling Edge Annotation API", apiErr)
+		batch.Reject()
+	}
+
+	batch.Ack()
+}
+
+// RequestToAnnotation (currently only REST supported on Chrysalis cloud. Later on GRPC just "push")
+func (ac *AnnotationConsumer) RequestToAnnotation(req *pb.AnnotateRequest) ai.Annotation {
+	aiAnnotation := ai.Annotation{
+		DeviceName:       req.DeviceName,
+		Confidence:       req.Confidence,
+		CustomMeta1:      req.CustomMeta_1,
+		CustomMeta2:      req.CustomMeta_2,
+		CustomMeta3:      req.CustomMeta_3,
+		CustomMeta4:      req.CustomMeta_4,
+		CustomMeta5:      req.CustomMe
