@@ -99,4 +99,27 @@ func (ac *AnnotationConsumer) RequestToAnnotation(req *pb.AnnotateRequest) ai.An
 		CustomMeta2:      req.CustomMeta_2,
 		CustomMeta3:      req.CustomMeta_3,
 		CustomMeta4:      req.CustomMeta_4,
-		CustomMeta5:      req.CustomMe
+		CustomMeta5:      req.CustomMeta_5,
+		EndTimestamp:     req.EndTimestamp,
+		StartTimestamp:   req.StartTimestamp,
+		EventType:        req.Type,
+		Height:           req.Height,
+		Width:            req.Width,
+		IsKeyframe:       req.IsKeyframe,
+		MLModel:          req.MlModel,
+		MLModelVersion:   req.MlModelVersion,
+		ObjectID:         req.ObjectId,
+		ObjectSignature:  req.ObjectSignature,
+		ObjectTrackingID: req.ObjectTrackingId,
+		ObjectType:       req.ObjectType,
+		OffsetDuration:   req.OffsetDuration,
+		OffsetFrameID:    req.OffsetFrameId,
+		OffsetPAcketID:   req.OffsetPacketId,
+		OffsetTimestamp:  req.OffsetTimestamp,
+		RemoteStreamID:   req.RemoteStreamId,
+		VideoType:        req.VideoType,
+	}
+	if req.Location != nil {
+		aiAnnotation.Location = &ai.Location{
+			Lat: req.Location.Lat,
+			Lon: req.Locati
