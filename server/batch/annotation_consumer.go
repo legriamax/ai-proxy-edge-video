@@ -53,4 +53,28 @@ func (ac *AnnotationConsumer) failedAnnotationsTryRedo(tick time.Time) {
 func (ac *AnnotationConsumer) Consume(batch rmq.Deliveries) {
 
 	if g.Conf.Annotation.Endpoint == "" {
-		g.Log.
+		g.Log.Error("expected annotation endpoint url. Check if you have /data/chrysalis/conf.yaml file")
+		return
+	}
+	apiKey, apiSecret, err := ac.settingsService.GetCurrentEdgeKeyAndSecret()
+	if err != nil {
+		g.Log.Error("failed to retrieve edge api key and edge api secret", err)
+		return
+	}
+
+	var aiAnnotations []*ai.Annotation
+
+	for _, b := range batch {
+		payload := []byte(b.Payload())
+		var req pb.AnnotateRequest
+		err := proto.Unmarshal(payload, &req)
+		if err != nil {
+			g.Log.Error("failed to unmarshal request proto in annotation consumer", err)
+			// drop event
+			continue
+		}
+		aiAnnotation := ac.RequestToAnnotation(&req)
+		aiAnnotations = append(aiAnnotations, &aiAnnotation)
+	}
+
+	sendPayload := ai.AnnotationL
