@@ -122,4 +122,24 @@ func (ac *AnnotationConsumer) RequestToAnnotation(req *pb.AnnotateRequest) ai.An
 	if req.Location != nil {
 		aiAnnotation.Location = &ai.Location{
 			Lat: req.Location.Lat,
-			Lon: req.Locati
+			Lon: req.Location.Lon,
+		}
+	}
+	if req.ObjectBoudingBox != nil {
+		aiAnnotation.ObjectBoundingBox = &ai.BoundingBox{
+			Height: req.ObjectBoudingBox.Height,
+			Width:  req.ObjectBoudingBox.Width,
+			Left:   req.ObjectBoudingBox.Left,
+			Top:    req.ObjectBoudingBox.Top,
+		}
+	}
+	if req.Mask != nil {
+		var maskPolygon []*ai.Coordinate
+		for _, m := range req.Mask {
+			maskPolygon = append(maskPolygon, &ai.Coordinate{X: m.X, Y: m.Y, Z: m.Z})
+		}
+		aiAnnotation.ObjectMask = maskPolygon
+	}
+
+	return aiAnnotation
+}
