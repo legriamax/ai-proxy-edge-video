@@ -34,3 +34,4 @@ paths:
       summary: Testing mqtt device status
       tags:
       - MQTT
+swagger: "2.0"
