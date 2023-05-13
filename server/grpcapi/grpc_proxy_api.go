@@ -43,4 +43,13 @@ func (gih *grpcImageHandler) Proxy(ctx context.Context, req *pb.ProxyRequest) (*
 
 	_, sErr := gih.processManager.UpdateProcessInfo(info)
 	if sErr != nil {
-		g.Log.Error("failed to update stream info", deviceID, sE
+		g.Log.Error("failed to update stream info", deviceID, sErr)
+		return nil, status.Errorf(codes.Internal, err.Error())
+	}
+	resp := &pb.ProxyResponse{
+		DeviceId:    deviceID,
+		Passthrough: info.RTMPStreamStatus.Streaming,
+	}
+
+	return resp, nil
+}
