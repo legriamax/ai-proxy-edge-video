@@ -62,4 +62,22 @@ func (gih *grpcImageHandler) Storage(ctx context.Context, req *pb.StorageRequest
 // API call to enable or disable storage on chrysalis cloud
 func (gih *grpcImageHandler) enableDisableStorageAPICall(storageOn bool, rtmpEndpoint string) error {
 	key, rtmpErr := utils.ParseRTMPKey(rtmpEndpoint)
-	if
+	if rtmpErr != nil {
+		g.Log.Error("Failed to parse rtmp key from rtmp url", rtmpErr)
+		return rtmpErr
+	}
+	input := &StorageInput{
+		Enable: storageOn,
+	}
+	if g.Conf.API.Endpoint == "" {
+		return errors.New("missing Chrysalis Cloud API endpoint in settings")
+	}
+
+	edgeKey, edgeSecret, eErr := gih.settingsManager.GetCurrentEdgeKeyAndSecret()
+	if eErr != nil {
+		g.Log.Error("Can't find edge key and secret. Visit https://cloud.chryscloud.com to enable annotation and storage.", eErr)
+		return errors.New("Can't find edge key and secret. Visit https://cloud.chryscloud.com to enable annotation and storage.")
+	}
+
+	apiClient := resty.New()
+	_, apiErr := utils.CallAPIWithBody(apiClient, "PUT"
