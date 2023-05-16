@@ -80,4 +80,10 @@ func (gih *grpcImageHandler) enableDisableStorageAPICall(storageOn bool, rtmpEnd
 	}
 
 	apiClient := resty.New()
-	_, apiErr := utils.CallAPIWithBody(apiClient, "PUT"
+	_, apiErr := utils.CallAPIWithBody(apiClient, "PUT", g.Conf.API.Endpoint+"/api/v1/edge/storage/"+key, input, edgeKey, edgeSecret)
+	if apiErr != nil {
+		g.Log.Error("failed to call Chrysalis Cloud API: ", apiErr)
+		return apiErr
+	}
+	return nil
+}
