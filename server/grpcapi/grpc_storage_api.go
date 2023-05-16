@@ -38,4 +38,28 @@ func (gih *grpcImageHandler) Storage(ctx context.Context, req *pb.StorageRequest
 		if apiErr == models.ErrForbidden {
 			return nil, status.Errorf(codes.PermissionDenied, "permission denied")
 		}
-		return nil, status.Errorf(codes.InvalidArgument, fmt.Sprintf("cannot enable
+		return nil, status.Errorf(codes.InvalidArgument, fmt.Sprintf("cannot enable or disable storage on chrysalis cloud: %v", apiErr.Error()))
+	}
+
+	if info.RTMPStreamStatus == nil {
+		info.RTMPStreamStatus = &models.RTMPStreamStatus{}
+	}
+	info.RTMPStreamStatus.Storing = req.Start
+	info.Modified = time.Now().Unix() * 1000
+
+	_, sErr := gih.processManager.UpdateProcessInfo(info)
+	if sErr != nil {
+		g.Log.Error("failed to update stream info", deviceID, sErr)
+		return nil, status.Errorf(codes.Internal, err.Error())
+	}
+	resp := &pb.StorageResponse{
+		DeviceId: deviceID,
+		Start:    req.Start,
+	}
+	return resp, nil
+}
+
+// API call to enable or disable storage on chrysalis cloud
+func (gih *grpcImageHandler) enableDisableStorageAPICall(storageOn bool, rtmpEndpoint string) error {
+	key, rtmpErr := utils.ParseRTMPKey(rtmpEndpoint)
+	if
