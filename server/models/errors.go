@@ -25,3 +25,4 @@ var (
 	ErrMissingInputParameters = errors.New("missing required parameters")
 	ErrStringTooShort         = errors.New("too short")
 	ErrProcessConflict        = errors.New("process conflict")
+)
