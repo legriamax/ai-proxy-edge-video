@@ -7,4 +7,21 @@
 //    http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed u
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package models
+
+import "errors"
+
+// Service level errors
+var (
+	ErrProcessNotFound          = errors.New("process not found")
+	ErrProcessNotFoundDatastore = errors.New("process not found in datastore")
+	ErrForbidden                = errors.New("operation not allowed")
+
+	ErrMissingInputParameters = errors.New("missing required parameters")
+	ErrStringTooShort         = errors.New("too short")
+	ErrProcessConflict        = errors.New("process conflict")
