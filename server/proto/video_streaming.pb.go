@@ -1989,3 +1989,695 @@ var file_video_streaming_proto_rawDesc = []byte{
 	0x74, 0x61, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c,
 	0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x22, 0x00, 0x30, 0x01, 0x12, 0x77, 0x0a, 0x08, 0x41, 0x6e, 0x6e,
+	0x6f, 0x74, 0x61, 0x74, 0x65, 0x12, 0x33, 0x2e, 0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x41, 0x6e, 0x6e, 0x6f, 0x74,
+	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x34, 0x2e, 0x63, 0x68, 0x72,
+	0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x73, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e,
+	0x41, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x6e, 0x0a, 0x05, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x12, 0x30, 0x2e, 0x63, 0x68,
+	0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x73,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31,
+	0x2e, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e,
+	0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65,
+	0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x50, 0x72, 0x6f, 0x78, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x74, 0x0a, 0x07, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x12, 0x32, 0x2e,
+	0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65,
+	0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x33, 0x2e, 0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x76, 0x69, 0x64, 0x65, 0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76,
+	0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x7d, 0x0a, 0x0a, 0x53, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x35, 0x2e, 0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x53, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x54, 0x69, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x36, 0x2e,
+	0x63, 0x68, 0x72, 0x79, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x69, 0x64, 0x65,
+	0x6f, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x54, 0x69, 0x6d, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+}
+
+var (
+	file_video_streaming_proto_rawDescOnce sync.Once
+	file_video_streaming_proto_rawDescData = file_video_streaming_proto_rawDesc
+)
+
+func file_video_streaming_proto_rawDescGZIP() []byte {
+	file_video_streaming_proto_rawDescOnce.Do(func() {
+		file_video_streaming_proto_rawDescData = protoimpl.X.CompressGZIP(file_video_streaming_proto_rawDescData)
+	})
+	return file_video_streaming_proto_rawDescData
+}
+
+var file_video_streaming_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_video_streaming_proto_goTypes = []interface{}{
+	(*AnnotateRequest)(nil),           // 0: chrys.cloud.videostreaming.v1beta1.AnnotateRequest
+	(*AnnotateResponse)(nil),          // 1: chrys.cloud.videostreaming.v1beta1.AnnotateResponse
+	(*Location)(nil),                  // 2: chrys.cloud.videostreaming.v1beta1.Location
+	(*Coordinate)(nil),                // 3: chrys.cloud.videostreaming.v1beta1.Coordinate
+	(*BoudingBox)(nil),                // 4: chrys.cloud.videostreaming.v1beta1.BoudingBox
+	(*ShapeProto)(nil),                // 5: chrys.cloud.videostreaming.v1beta1.ShapeProto
+	(*VideoFrame)(nil),                // 6: chrys.cloud.videostreaming.v1beta1.VideoFrame
+	(*VideoFrameRequest)(nil),         // 7: chrys.cloud.videostreaming.v1beta1.VideoFrameRequest
+	(*VideoFrameBufferedRequest)(nil), // 8: chrys.cloud.videostreaming.v1beta1.VideoFrameBufferedRequest
+	(*ListStream)(nil),                // 9: chrys.cloud.videostreaming.v1beta1.ListStream
+	(*ListStreamRequest)(nil),         // 10: chrys.cloud.videostreaming.v1beta1.ListStreamRequest
+	(*ProxyRequest)(nil),              // 11: chrys.cloud.videostreaming.v1beta1.ProxyRequest
+	(*ProxyResponse)(nil),             // 12: chrys.cloud.videostreaming.v1beta1.ProxyResponse
+	(*StorageRequest)(nil),            // 13: chrys.cloud.videostreaming.v1beta1.StorageRequest
+	(*StorageResponse)(nil),           // 14: chrys.cloud.videostreaming.v1beta1.StorageResponse
+	(*VideoCodec)(nil),                // 15: chrys.cloud.videostreaming.v1beta1.VideoCodec
+	(*VideoProbeRequest)(nil),         // 16: chrys.cloud.videostreaming.v1beta1.VideoProbeRequest
+	(*VideoProbeResponse)(nil),        // 17: chrys.cloud.videostreaming.v1beta1.VideoProbeResponse
+	(*VideoBuffer)(nil),               // 18: chrys.cloud.videostreaming.v1beta1.VideoBuffer
+	(*SystemTimeResponse)(nil),        // 19: chrys.cloud.videostreaming.v1beta1.SystemTimeResponse
+	(*SystemTimeRequest)(nil),         // 20: chrys.cloud.videostreaming.v1beta1.SystemTimeRequest
+	(*ShapeProto_Dim)(nil),            // 21: chrys.cloud.videostreaming.v1beta1.ShapeProto.Dim
+}
+var file_video_streaming_proto_depIdxs = []int32{
+	4,  // 0: chrys.cloud.videostreaming.v1beta1.AnnotateRequest.object_bouding_box:type_name -> chrys.cloud.videostreaming.v1beta1.BoudingBox
+	2,  // 1: chrys.cloud.videostreaming.v1beta1.AnnotateRequest.location:type_name -> chrys.cloud.videostreaming.v1beta1.Location
+	3,  // 2: chrys.cloud.videostreaming.v1beta1.AnnotateRequest.object_coordinate:type_name -> chrys.cloud.videostreaming.v1beta1.Coordinate
+	3,  // 3: chrys.cloud.videostreaming.v1beta1.AnnotateRequest.mask:type_name -> chrys.cloud.videostreaming.v1beta1.Coordinate
+	21, // 4: chrys.cloud.videostreaming.v1beta1.ShapeProto.dim:type_name -> chrys.cloud.videostreaming.v1beta1.ShapeProto.Dim
+	5,  // 5: chrys.cloud.videostreaming.v1beta1.VideoFrame.shape:type_name -> chrys.cloud.videostreaming.v1beta1.ShapeProto
+	15, // 6: chrys.cloud.videostreaming.v1beta1.VideoProbeResponse.video_codec:type_name -> chrys.cloud.videostreaming.v1beta1.VideoCodec
+	18, // 7: chrys.cloud.videostreaming.v1beta1.VideoProbeResponse.buffer:type_name -> chrys.cloud.videostreaming.v1beta1.VideoBuffer
+	7,  // 8: chrys.cloud.videostreaming.v1beta1.Image.VideoLatestImage:input_type -> chrys.cloud.videostreaming.v1beta1.VideoFrameRequest
+	8,  // 9: chrys.cloud.videostreaming.v1beta1.Image.VideoBufferedImage:input_type -> chrys.cloud.videostreaming.v1beta1.VideoFrameBufferedRequest
+	16, // 10: chrys.cloud.videostreaming.v1beta1.Image.VideoProbe:input_type -> chrys.cloud.videostreaming.v1beta1.VideoProbeRequest
+	10, // 11: chrys.cloud.videostreaming.v1beta1.Image.ListStreams:input_type -> chrys.cloud.videostreaming.v1beta1.ListStreamRequest
+	0,  // 12: chrys.cloud.videostreaming.v1beta1.Image.Annotate:input_type -> chrys.cloud.videostreaming.v1beta1.AnnotateRequest
+	11, // 13: chrys.cloud.videostreaming.v1beta1.Image.Proxy:input_type -> chrys.cloud.videostreaming.v1beta1.ProxyRequest
+	13, // 14: chrys.cloud.videostreaming.v1beta1.Image.Storage:input_type -> chrys.cloud.videostreaming.v1beta1.StorageRequest
+	20, // 15: chrys.cloud.videostreaming.v1beta1.Image.SystemTime:input_type -> chrys.cloud.videostreaming.v1beta1.SystemTimeRequest
+	6,  // 16: chrys.cloud.videostreaming.v1beta1.Image.VideoLatestImage:output_type -> chrys.cloud.videostreaming.v1beta1.VideoFrame
+	6,  // 17: chrys.cloud.videostreaming.v1beta1.Image.VideoBufferedImage:output_type -> chrys.cloud.videostreaming.v1beta1.VideoFrame
+	17, // 18: chrys.cloud.videostreaming.v1beta1.Image.VideoProbe:output_type -> chrys.cloud.videostreaming.v1beta1.VideoProbeResponse
+	9,  // 19: chrys.cloud.videostreaming.v1beta1.Image.ListStreams:output_type -> chrys.cloud.videostreaming.v1beta1.ListStream
+	1,  // 20: chrys.cloud.videostreaming.v1beta1.Image.Annotate:output_type -> chrys.cloud.videostreaming.v1beta1.AnnotateResponse
+	12, // 21: chrys.cloud.videostreaming.v1beta1.Image.Proxy:output_type -> chrys.cloud.videostreaming.v1beta1.ProxyResponse
+	14, // 22: chrys.cloud.videostreaming.v1beta1.Image.Storage:output_type -> chrys.cloud.videostreaming.v1beta1.StorageResponse
+	19, // 23: chrys.cloud.videostreaming.v1beta1.Image.SystemTime:output_type -> chrys.cloud.videostreaming.v1beta1.SystemTimeResponse
+	16, // [16:24] is the sub-list for method output_type
+	8,  // [8:16] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
+}
+
+func init() { file_video_streaming_proto_init() }
+func file_video_streaming_proto_init() {
+	if File_video_streaming_proto != nil {
+		return
+	}
+	if !protoimpl.UnsafeEnabled {
+		file_video_streaming_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnnotateRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnnotateResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Location); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Coordinate); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BoudingBox); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ShapeProto); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoFrame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoFrameRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoFrameBufferedRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListStream); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProxyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProxyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StorageRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StorageResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoCodec); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoProbeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoProbeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoBuffer); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SystemTimeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SystemTimeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_video_streaming_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ShapeProto_Dim); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	type x struct{}
+	out := protoimpl.TypeBuilder{
+		File: protoimpl.DescBuilder{
+			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
+			RawDescriptor: file_video_streaming_proto_rawDesc,
+			NumEnums:      0,
+			NumMessages:   22,
+			NumExtensions: 0,
+			NumServices:   1,
+		},
+		GoTypes:           file_video_streaming_proto_goTypes,
+		DependencyIndexes: file_video_streaming_proto_depIdxs,
+		MessageInfos:      file_video_streaming_proto_msgTypes,
+	}.Build()
+	File_video_streaming_proto = out.File
+	file_video_streaming_proto_rawDesc = nil
+	file_video_streaming_proto_goTypes = nil
+	file_video_streaming_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// ImageClient is the client API for Image service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ImageClient interface {
+	VideoLatestImage(ctx context.Context, in *VideoFrameRequest, opts ...grpc.CallOption) (*VideoFrame, error)
+	VideoBufferedImage(ctx context.Context, in *VideoFrameBufferedRequest, opts ...grpc.CallOption) (Image_VideoBufferedImageClient, error)
+	VideoProbe(ctx context.Context, in *VideoProbeRequest, opts ...grpc.CallOption) (*VideoProbeResponse, error)
+	ListStreams(ctx context.Context, in *ListStreamRequest, opts ...grpc.CallOption) (Image_ListStreamsClient, error)
+	Annotate(ctx context.Context, in *AnnotateRequest, opts ...grpc.CallOption) (*AnnotateResponse, error)
+	Proxy(ctx context.Context, in *ProxyRequest, opts ...grpc.CallOption) (*ProxyResponse, error)
+	Storage(ctx context.Context, in *StorageRequest, opts ...grpc.CallOption) (*StorageResponse, error)
+	SystemTime(ctx context.Context, in *SystemTimeRequest, opts ...grpc.CallOption) (*SystemTimeResponse, error)
+}
+
+type imageClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewImageClient(cc grpc.ClientConnInterface) ImageClient {
+	return &imageClient{cc}
+}
+
+func (c *imageClient) VideoLatestImage(ctx context.Context, in *VideoFrameRequest, opts ...grpc.CallOption) (*VideoFrame, error) {
+	out := new(VideoFrame)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/VideoLatestImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageClient) VideoBufferedImage(ctx context.Context, in *VideoFrameBufferedRequest, opts ...grpc.CallOption) (Image_VideoBufferedImageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_Image_serviceDesc.Streams[0], "/chrys.cloud.videostreaming.v1beta1.Image/VideoBufferedImage", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &imageVideoBufferedImageClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Image_VideoBufferedImageClient interface {
+	Recv() (*VideoFrame, error)
+	grpc.ClientStream
+}
+
+type imageVideoBufferedImageClient struct {
+	grpc.ClientStream
+}
+
+func (x *imageVideoBufferedImageClient) Recv() (*VideoFrame, error) {
+	m := new(VideoFrame)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *imageClient) VideoProbe(ctx context.Context, in *VideoProbeRequest, opts ...grpc.CallOption) (*VideoProbeResponse, error) {
+	out := new(VideoProbeResponse)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/VideoProbe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageClient) ListStreams(ctx context.Context, in *ListStreamRequest, opts ...grpc.CallOption) (Image_ListStreamsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_Image_serviceDesc.Streams[1], "/chrys.cloud.videostreaming.v1beta1.Image/ListStreams", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &imageListStreamsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Image_ListStreamsClient interface {
+	Recv() (*ListStream, error)
+	grpc.ClientStream
+}
+
+type imageListStreamsClient struct {
+	grpc.ClientStream
+}
+
+func (x *imageListStreamsClient) Recv() (*ListStream, error) {
+	m := new(ListStream)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *imageClient) Annotate(ctx context.Context, in *AnnotateRequest, opts ...grpc.CallOption) (*AnnotateResponse, error) {
+	out := new(AnnotateResponse)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/Annotate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageClient) Proxy(ctx context.Context, in *ProxyRequest, opts ...grpc.CallOption) (*ProxyResponse, error) {
+	out := new(ProxyResponse)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/Proxy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageClient) Storage(ctx context.Context, in *StorageRequest, opts ...grpc.CallOption) (*StorageResponse, error) {
+	out := new(StorageResponse)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/Storage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *imageClient) SystemTime(ctx context.Context, in *SystemTimeRequest, opts ...grpc.CallOption) (*SystemTimeResponse, error) {
+	out := new(SystemTimeResponse)
+	err := c.cc.Invoke(ctx, "/chrys.cloud.videostreaming.v1beta1.Image/SystemTime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ImageServer is the server API for Image service.
+type ImageServer interface {
+	VideoLatestImage(context.Context, *VideoFrameRequest) (*VideoFrame, error)
+	VideoBufferedImage(*VideoFrameBufferedRequest, Image_VideoBufferedImageServer) error
+	VideoProbe(context.Context, *VideoProbeRequest) (*VideoProbeResponse, error)
+	ListStreams(*ListStreamRequest, Image_ListStreamsServer) error
+	Annotate(context.Context, *AnnotateRequest) (*AnnotateResponse, error)
+	Proxy(context.Context, *ProxyRequest) (*ProxyResponse, error)
+	Storage(context.Context, *StorageRequest) (*StorageResponse, error)
+	SystemTime(context.Context, *SystemTimeRequest) (*SystemTimeResponse, error)
+}
+
+// UnimplementedImageServer can be embedded to have forward compatible implementations.
+type UnimplementedImageServer struct {
+}
+
+func (*UnimplementedImageServer) VideoLatestImage(context.Context, *VideoFrameRequest) (*VideoFrame, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VideoLatestImage not implemented")
+}
+func (*UnimplementedImageServer) VideoBufferedImage(*VideoFrameBufferedRequest, Image_VideoBufferedImageServer) error {
+	return status.Errorf(codes.Unimplemented, "method VideoBufferedImage not implemented")
+}
+func (*UnimplementedImageServer) VideoProbe(context.Context, *VideoProbeRequest) (*VideoProbeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VideoProbe not implemented")
+}
+func (*UnimplementedImageServer) ListStreams(*ListStreamRequest, Image_ListStreamsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListStreams not implemented")
+}
+func (*UnimplementedImageServer) Annotate(context.Context, *AnnotateRequest) (*AnnotateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Annotate not implemented")
+}
+func (*UnimplementedImageServer) Proxy(context.Context, *ProxyRequest) (*ProxyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Proxy not implemented")
+}
+func (*UnimplementedImageServer) Storage(context.Context, *StorageRequest) (*StorageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Storage not implemented")
+}
+func (*UnimplementedImageServer) SystemTime(context.Context, *SystemTimeRequest) (*SystemTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SystemTime not implemented")
+}
+
+func RegisterImageServer(s *grpc.Server, srv ImageServer) {
+	s.RegisterService(&_Image_serviceDesc, srv)
+}
+
+func _Image_VideoLatestImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VideoFrameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServer).VideoLatestImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chrys.cloud.videostreaming.v1beta1.Image/VideoLatestImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServer).VideoLatestImage(ctx, req.(*VideoFrameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Image_VideoBufferedImage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(VideoFrameBufferedRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ImageServer).VideoBufferedImage(m, &imageVideoBufferedImageServer{stream})
+}
+
+type Image_VideoBufferedImageServer interface {
+	Send(*VideoFrame) error
+	grpc.ServerStream
+}
+
+type imageVideoBufferedImageServer struct {
+	grpc.ServerStream
+}
+
+func (x *imageVideoBufferedImageServer) Send(m *VideoFrame) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Image_VideoProbe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VideoProbeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServer).VideoProbe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chrys.cloud.videostreaming.v1beta1.Image/VideoProbe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServer).VideoProbe(ctx, req.(*VideoProbeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Image_ListStreams_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ImageServer).ListStreams(m, &imageListStreamsServer{stream})
+}
+
+type Image_ListStreamsServer interface {
+	Send(*ListStream) error
+	grpc.ServerStream
+}
+
+type imageListStreamsServer struct {
+	grpc.ServerStream
+}
+
+func (x *imageListStreamsServer) Send(m *ListStream) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Image_Annotate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AnnotateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServer).Annotate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chrys.cloud.videostreaming.v1beta1.Image/Annotate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServer).Annotate(ctx, req.(*AnnotateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Image_Proxy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProxyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServer).Proxy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
