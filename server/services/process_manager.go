@@ -58,4 +58,24 @@ func NewProcessManager(storage *Storage, rdb *redis.Client) *ProcessManager {
 }
 
 // Start - starts the docker container with rtsp, device_id and possibly rtmp environment variables.
-// Restarts always when something goes wron
+// Restarts always when something goes wrong within the streaming process
+func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *models.ImageUpgrade) error {
+
+	// detect architecture
+	arch := runtime.GOARCH
+
+	if _, ok := ArchitectureSuffixMap[arch]; !ok {
+		return errors.New("architecture currently not supported")
+	}
+
+	if process.Name == "" || process.RTSPEndpoint == "" {
+		return errors.New("required parameters missing")
+	}
+
+	if !imageUpgrade.HasImage && !imageUpgrade.HasUpgrade {
+		return errors.New("no camera container found. Please refer to documentation on how to pull a docker image manually")
+	}
+
+	settingsTagBytes, err := pm.storage.Get(models.PrefixSettingsDockerTagVersions, "rtsp")
+	if err != nil {
+		if err == badger.ErrKeyNotFound {
