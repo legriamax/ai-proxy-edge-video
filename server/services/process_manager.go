@@ -137,4 +137,26 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 		g.Log.Error("container prunning fialed", pruneErr)
 		return pruneErr
 	}
-	g.Log.Info("prune successfull. Report and space reclaimed:", pruneReport.
+	g.Log.Info("prune successfull. Report and space reclaimed:", pruneReport.ContainersDeleted, pruneReport.SpaceReclaimed)
+
+	hostConfig := &container.HostConfig{
+		// PortBindings: mappingPorts,
+		LogConfig: container.LogConfig{
+			Type:   "json-file",
+			Config: map[string]string{"max-file": "3", "max-size": "3M"},
+		},
+		RestartPolicy: container.RestartPolicy{Name: "always"},
+		Resources: container.Resources{
+			CPUShares: 1024, // equal weight to all containers. check here the docs here:  https://docs.docker.com/config/containers/resource_constraints/
+		},
+		NetworkMode: container.NetworkMode("chrysnet"),
+	}
+
+	if g.Conf.Buffer.OnDisk {
+		mounts := make([]mount.Mount, 0)
+		mount := mount.Mount{
+			Type:     mount.TypeBind,
+			Source:   g.Conf.Buffer.OnDiskFolder,
+			Target:   g.Conf.Buffer.OnDiskFolder,
+			ReadOnly: false,
+		
