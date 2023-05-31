@@ -94,4 +94,27 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 				Tag:        tag,
 				Version:    imageUpgrade.CurrentVersion,
 			}
-			stb, sErr := pm.storeSettingsTagVersion(settingsTagVersion
+			stb, sErr := pm.storeSettingsTagVersion(settingsTagVersion)
+			if sErr != nil {
+				g.Log.Error("failed to store new settings tag version ", sErr)
+				return sErr
+			}
+
+			settingsTagBytes = stb
+		} else {
+			g.Log.Error("failed to read rtsp tag from settings", err)
+			return err
+		}
+	}
+
+	var settingsTag models.SettingDockerTagVersion
+	err = json.Unmarshal(settingsTagBytes, &settingsTag)
+	if err != nil {
+		g.Log.Error("failed to unamrshal settings tag", err)
+		return err
+	}
+	process.ImageTag = settingsTag.Tag + ":" + settingsTag.Version
+
+	// Check the latest version that exists on the disk (and if is the same as the one in settings)
+	// if is not, correct the latest version stored (most likely user chose to manually deleted the newer version)
+	if imageUpgrade.CurrentVersio
