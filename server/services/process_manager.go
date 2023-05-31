@@ -117,4 +117,24 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 
 	// Check the latest version that exists on the disk (and if is the same as the one in settings)
 	// if is not, correct the latest version stored (most likely user chose to manually deleted the newer version)
-	if imageUpgrade.CurrentVersio
+	if imageUpgrade.CurrentVersion != settingsTag.Version {
+		settingsTag.Version = imageUpgrade.CurrentVersion
+
+		process.ImageTag = imageUpgrade.Name + ":" + imageUpgrade.CurrentVersion
+
+		_, sErr := pm.storeSettingsTagVersion(&settingsTag)
+		if sErr != nil {
+			g.Log.Error("failed to store new settings tag", sErr, ", image version: ", settingsTag.Tag, settingsTag.Version)
+			return sErr
+		}
+	}
+
+	cl := docker.NewSocketClient(docker.Log(g.Log), docker.Host("unix:///var/run/docker.sock"))
+
+	fl := filters.NewArgs()
+	pruneReport, pruneErr := cl.ContainersPrune(fl)
+	if pruneErr != nil {
+		g.Log.Error("container prunning fialed", pruneErr)
+		return pruneErr
+	}
+	g.Log.Info("prune successfull. Report and space reclaimed:", pruneReport.
