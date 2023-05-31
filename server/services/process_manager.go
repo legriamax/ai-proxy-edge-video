@@ -79,3 +79,19 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 	settingsTagBytes, err := pm.storage.Get(models.PrefixSettingsDockerTagVersions, "rtsp")
 	if err != nil {
 		if err == badger.ErrKeyNotFound {
+
+			// if no docker tag version stored in database but image does exist on disk, then store settings docker tag version with that image
+			tag := models.CameraTypeToImageTag["rtsp"]
+			if imageUpgrade == nil {
+				return errors.New("Image not found. Please check the docs and pull the docker image manually.")
+			}
+			maximumExistingTag := tag + ":" + imageUpgrade.CurrentVersion
+			// store to database
+			g.Log.Info("maximum existing tag od disk found: ", maximumExistingTag)
+
+			settingsTagVersion := &models.SettingDockerTagVersion{
+				CameraType: "rtsp",
+				Tag:        tag,
+				Version:    imageUpgrade.CurrentVersion,
+			}
+			stb, sErr := pm.storeSettingsTagVersion(settingsTagVersion
