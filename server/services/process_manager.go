@@ -159,4 +159,22 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 			Source:   g.Conf.Buffer.OnDiskFolder,
 			Target:   g.Conf.Buffer.OnDiskFolder,
 			ReadOnly: false,
-		
+		}
+		mounts = append(mounts, mount)
+
+		hostConfig.Mounts = mounts
+	}
+
+	envVars := []string{"rtsp_endpoint=" + process.RTSPEndpoint, "device_id=" + process.Name, "in_memory_buffer=" + strconv.Itoa(g.Conf.Buffer.InMemory)}
+	if process.RTMPEndpoint != "" {
+		envVars = append(envVars, "rtmp_endpoint="+process.RTMPEndpoint)
+	}
+	if g.Conf.Buffer.OnDisk {
+		envVars = append(envVars, "disk_buffer_path="+g.Conf.Buffer.OnDiskFolder)
+		envVars = append(envVars, "disk_cleanup_rate="+g.Conf.Buffer.OnDiskCleanupOlderThan)
+	}
+	if g.Conf.Redis.Connection != "" {
+		host := strings.Split(g.Conf.Redis.Connection, ":")
+		if len(host) == 2 {
+			envVars = append(envVars, "redis_host="+host[0])
+			envVars = append(envVars, "redis_port="+
