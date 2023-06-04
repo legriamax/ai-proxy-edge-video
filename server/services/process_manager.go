@@ -177,4 +177,34 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 		host := strings.Split(g.Conf.Redis.Connection, ":")
 		if len(host) == 2 {
 			envVars = append(envVars, "redis_host="+host[0])
-			envVars = append(envVars, "redis_port="+
+			envVars = append(envVars, "redis_port="+host[1])
+		}
+	}
+	if g.Conf.Buffer.InMemoryScale != "" {
+		envVars = append(envVars, "memory_scale="+g.Conf.Buffer.InMemoryScale)
+	}
+
+	envVars = append(envVars, "PYTHONUNBUFFERED=0") // for output to console
+
+	_, ccErr := cl.ContainerCreate(strings.ToLower(process.Name), &container.Config{
+		Image: process.ImageTag,
+		Env:   envVars,
+	}, hostConfig, nil)
+
+	if ccErr != nil {
+		g.Log.Error("failed to create container ", process.Name, ccErr)
+		return ccErr
+	}
+
+	err = cl.ContainerStart(process.Name)
+	if err != nil {
+		g.Log.Error("failed to start container", process.Name, err)
+		return err
+	}
+
+	process.Status = "running"
+	process.Created = time.Now().Unix() * 1000
+
+	// set default value in redis if RTMP streaming enabled
+	if process.RTMPEndpoint != "" {
+		va
