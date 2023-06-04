@@ -230,4 +230,27 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 
 	err = pm.storage.Put(models.PrefixRTSPProcess, process.Name, obj)
 	if err != nil {
-		g.Log.Error("failed to store process 
+		g.Log.Error("failed to store process into datastore", err)
+		return err
+	}
+
+	return nil
+}
+
+// Stop - stops the docker container by the name of deviceID and removed from local datastore
+// databasePrefix = models.PrefixRTSPProcess or models.PrefixAppProcess
+func (pm *ProcessManager) Stop(deviceID string, databasePrefix string) error {
+	cl := docker.NewSocketClient(docker.Log(g.Log), docker.Host("unix:///var/run/docker.sock"))
+
+	container, err := cl.ContainerGet(deviceID)
+	if err != nil {
+		if dockerErrors.IsErrNotFound(err) {
+			g.Log.Info("container not found to be stopeed", err)
+			return models.ErrProcessNotFound
+		}
+	}
+
+	// waits up to 10 minutes to stop the container, otherwise kills after 30 seconds
+	killAfer := time.Second * 5
+	err = cl.ContainerStop(container.ID, &killAfer)
+	if err != 
