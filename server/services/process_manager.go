@@ -207,4 +207,27 @@ func (pm *ProcessManager) Start(process *models.StreamProcess, imageUpgrade *mod
 
 	// set default value in redis if RTMP streaming enabled
 	if process.RTMPEndpoint != "" {
-		va
+		valMap := make(map[string]interface{}, 0)
+		valMap[models.RedisLastAccessQueryTimeKey] = time.Now().Unix() * 1000
+		valMap[models.RedisProxyRTMPKey] = true
+
+		rErr := pm.rdb.HSet(models.RedisLastAccessPrefix+process.Name, valMap).Err()
+		if rErr != nil {
+			g.Log.Error("failed to store startproxy value map to redis", rErr)
+			return rErr
+		}
+		if process.RTMPStreamStatus == nil {
+			process.RTMPStreamStatus = &models.RTMPStreamStatus{}
+		}
+		process.RTMPStreamStatus.Streaming = true
+	}
+
+	obj, err := json.Marshal(process)
+	if err != nil {
+		g.Log.Error("failed to marshal process json", err)
+		return err
+	}
+
+	err = pm.storage.Put(models.PrefixRTSPProcess, process.Name, obj)
+	if err != nil {
+		g.Log.Error("failed to store process 
