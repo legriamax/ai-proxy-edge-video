@@ -253,4 +253,29 @@ func (pm *ProcessManager) Stop(deviceID string, databasePrefix string) error {
 	// waits up to 10 minutes to stop the container, otherwise kills after 30 seconds
 	killAfer := time.Second * 5
 	err = cl.ContainerStop(container.ID, &killAfer)
-	if err != 
+	if err != nil {
+		if dockerErrors.IsErrNotFound(err) {
+			g.Log.Warn("container doesn't exist. probably stopped before", err)
+			return nil
+		}
+	}
+
+	err = pm.storage.Del(databasePrefix, deviceID)
+	if err != nil {
+		g.Log.Error("Failed to delete rtsp proces", err)
+		return err
+	}
+
+	fl := filters.NewArgs()
+	pruneReport, pruneErr := cl.ContainersPrune(fl)
+	if pruneErr != nil {
+		g.Log.Error("container prunning fialed", pruneErr)
+		return pruneErr
+	}
+	g.Log.Info("prune successfull. Report and space reclaimed:", pruneReport.ContainersDeleted, pruneReport.SpaceReclaimed)
+
+	return nil
+}
+
+// ListStream - GRPC method for list all streams (doesn't alter the actual processes)
+func (pm *ProcessManager) ListStream(ctx context.Context, fo
