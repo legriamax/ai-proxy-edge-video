@@ -302,4 +302,29 @@ func (pm *ProcessManager) ListStream(ctx context.Context, found func(process *mo
 		}
 		info, err := pm.Info(proc.Name)
 		if err != nil {
-			g.Log
+			g.Log.Warn("failed to load process", err)
+			if err == models.ErrProcessNotFound {
+				continue
+			}
+			g.Log.Error("failed to get process info", err)
+			return err
+		}
+		err = found(info)
+		if err != nil {
+			g.Log.Error("failed to return found process", err)
+			return err
+		}
+	}
+	if err != nil {
+		g.Log.Error("unexpcted error on unidirectional process info stream", err)
+		return err
+	}
+	return nil
+}
+
+// List - listing all of the process in any status (also augments the list based on current processes)
+func (pm *ProcessManager) List() ([]*models.StreamProcess, error) {
+	objects, err := pm.storage.List(models.PrefixRTSPProcess)
+	if err != nil {
+		g.Log.Error("failed to list devices", err)
+		return nil, er
