@@ -278,4 +278,28 @@ func (pm *ProcessManager) Stop(deviceID string, databasePrefix string) error {
 }
 
 // ListStream - GRPC method for list all streams (doesn't alter the actual processes)
-func (pm *ProcessManager) ListStream(ctx context.Context, fo
+func (pm *ProcessManager) ListStream(ctx context.Context, found func(process *models.StreamProcess) error) error {
+	objects, err := pm.storage.List(models.PrefixRTSPProcess)
+	if err != nil {
+		g.Log.Error("failed to list devices", err)
+		return err
+	}
+	processes := make([]*models.StreamProcess, 0)
+	for _, v := range objects {
+		var process models.StreamProcess
+		dErr := json.Unmarshal(v, &process)
+		if dErr != nil {
+			g.Log.Error("failed to unamrshal object", err)
+			return err
+		}
+		processes = append(processes, &process)
+	}
+	// clean up and update the list
+	for _, proc := range processes {
+		if ctx.Err() == context.Canceled || ctx.Err() == context.DeadlineExceeded {
+			g.Log.Warn("context is cancelled")
+			return nil
+		}
+		info, err := pm.Info(proc.Name)
+		if err != nil {
+			g.Log
