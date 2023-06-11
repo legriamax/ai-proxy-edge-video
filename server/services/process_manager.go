@@ -327,4 +327,29 @@ func (pm *ProcessManager) List() ([]*models.StreamProcess, error) {
 	objects, err := pm.storage.List(models.PrefixRTSPProcess)
 	if err != nil {
 		g.Log.Error("failed to list devices", err)
-		return nil, er
+		return nil, err
+	}
+	processes := make([]*models.StreamProcess, 0)
+	for _, v := range objects {
+		var process models.StreamProcess
+		dErr := json.Unmarshal(v, &process)
+		if dErr != nil {
+			g.Log.Error("failed to unamrshal object", err)
+			return nil, err
+		}
+		processes = append(processes, &process)
+	}
+
+	deleteProcesses := make([]*models.StreamProcess, 0)
+	cleanProcesses := make([]*models.StreamProcess, 0)
+	// clean up and update the list
+	for _, proc := range processes {
+		info, err := pm.Info(proc.Name)
+		if err != nil {
+			g.Log.Warn("failed to load process", err)
+			if err == models.ErrProcessNotFound {
+				// remove from the list and datastore
+				deleteProcesses = append(deleteProcesses, proc)
+				continue
+			}
+			g.Log.Error("failed to get proc
