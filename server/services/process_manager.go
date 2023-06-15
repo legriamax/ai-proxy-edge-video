@@ -375,4 +375,31 @@ func (pm *ProcessManager) Info(deviceID string) (*models.StreamProcess, error) {
 	container, err := cl.ContainerGet(deviceID)
 	if err != nil {
 		if dockerErrors.IsErrNotFound(err) {
-		
+			g.Log.Info("container not found to be stopeed", err)
+			return nil, models.ErrProcessNotFound
+		}
+		g.Log.Error("failed to retrieve container", err)
+		return nil, err
+	}
+
+	// max 100 lines of logs
+	logs, err := cl.ContainerLogs(container.ID, 100, time.Unix(0, 0))
+	if err != nil {
+		g.Log.Error("failed to retrieve container logs", err)
+		return nil, err
+	}
+
+	sp, err := pm.storage.Get(models.PrefixRTSPProcess, deviceID)
+	if err != nil {
+		return nil, models.ErrProcessNotFoundDatastore
+	}
+	var status models.StreamProcess
+	err = json.Unmarshal(sp, &status)
+	if err != nil {
+		g.Log.Error("failed to unmarshal stored process ", err)
+		return nil, err
+	}
+	status.ContainerID = container.ID
+	if container != nil {
+		status.State = container.State
+		status.St
