@@ -402,4 +402,28 @@ func (pm *ProcessManager) Info(deviceID string) (*models.StreamProcess, error) {
 	status.ContainerID = container.ID
 	if container != nil {
 		status.State = container.State
-		status.St
+		status.Status = container.State.Status
+	} else {
+		status.Status = "unknown"
+	}
+	status.Logs = logs
+	status.Modified = time.Now().Unix() * 1000
+
+	b, err := json.Marshal(&status)
+	if err != nil {
+		g.Log.Error("failed to marshal process", err)
+		return nil, err
+	}
+	err = pm.storage.Put(models.PrefixRTSPProcess, status.Name, b)
+	if err != nil {
+		g.Log.Error("failed to store process after info", err)
+		return nil, err
+	}
+
+	return &status, nil
+}
+
+// UpdateProcessInfo - start and stop information propagated into redis and state stored into datastore
+func (pm *ProcessManager) UpdateProcessInfo(stream *models.StreamProcess) (*models.StreamProcess, error) {
+
+	stream.Modified = time.Now().Unix() * 1000 // m
