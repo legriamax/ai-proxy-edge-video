@@ -352,4 +352,27 @@ func (pm *ProcessManager) List() ([]*models.StreamProcess, error) {
 				deleteProcesses = append(deleteProcesses, proc)
 				continue
 			}
-			g.Log.Error("failed to get proc
+			g.Log.Error("failed to get process info", err)
+			return nil, err
+		}
+		cleanProcesses = append(cleanProcesses, info)
+	}
+	if len(deleteProcesses) > 0 {
+		for _, proc := range deleteProcesses {
+			err := pm.storage.Del(models.PrefixRTSPProcess, proc.Name)
+			if err != nil {
+				g.Log.Error("failed to delete process with name", proc.Name, err)
+				return nil, err
+			}
+		}
+	}
+	return cleanProcesses, nil
+}
+
+// Info - return information on the streaming docker container (it also updates the process status)
+func (pm *ProcessManager) Info(deviceID string) (*models.StreamProcess, error) {
+	cl := docker.NewSocketClient(docker.Log(g.Log), docker.Host("unix:///var/run/docker.sock"))
+	container, err := cl.ContainerGet(deviceID)
+	if err != nil {
+		if dockerErrors.IsErrNotFound(err) {
+		
