@@ -426,4 +426,32 @@ func (pm *ProcessManager) Info(deviceID string) (*models.StreamProcess, error) {
 // UpdateProcessInfo - start and stop information propagated into redis and state stored into datastore
 func (pm *ProcessManager) UpdateProcessInfo(stream *models.StreamProcess) (*models.StreamProcess, error) {
 
-	stream.Modified = time.Now().Unix() * 1000 // m
+	stream.Modified = time.Now().Unix() * 1000 // miliseconds
+
+	b, err := json.Marshal(stream)
+	if err != nil {
+		g.Log.Error("failed to marshal process", err)
+		return nil, err
+	}
+	err = pm.storage.Put(models.PrefixRTSPProcess, stream.Name, b)
+	if err != nil {
+		g.Log.Error("failed to store process after info", err)
+		return nil, err
+	}
+
+	// TODO: add to redis
+
+	return stream, nil
+}
+
+// stores settings tag version and returns bytes
+func (pm *ProcessManager) storeSettingsTagVersion(settingsTagVersion *models.SettingDockerTagVersion) ([]byte, error) {
+	stb, mErr := json.Marshal(settingsTagVersion)
+	if mErr != nil {
+		g.Log.Error("failed to marshal new settings tag version", mErr)
+		return nil, mErr
+	}
+
+	pErr := pm.storage.Put(models.PrefixSettingsDockerTagVersions, "rtsp", stb)
+	if pErr != nil {
+		g.Log.Error("Failed to st
