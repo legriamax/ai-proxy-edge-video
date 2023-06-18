@@ -454,4 +454,8 @@ func (pm *ProcessManager) storeSettingsTagVersion(settingsTagVersion *models.Set
 
 	pErr := pm.storage.Put(models.PrefixSettingsDockerTagVersions, "rtsp", stb)
 	if pErr != nil {
-		g.Log.Error("Failed to st
+		g.Log.Error("Failed to store settings tag version to db", pErr)
+		return nil, pErr
+	}
+	return stb, nil
+}
