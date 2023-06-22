@@ -71,4 +71,21 @@ func (pm *ProcessManager) StatsAllProcesses(sett *models.Settings) (*models.AllS
 		calculated.Status = c.State.Status
 		restartCount := 0
 		if c.State.ExitCode > 0 {
-			restartCount = c.Re
+			restartCount = c.RestartCount
+		}
+
+		procStats := &models.ProcessStats{
+			Name:        process.Name,
+			ImageTag:    process.ImageTag,
+			Cpu:         int(calculated.CPUPercent),
+			Memory:      int(calculated.MemoryPercent),
+			NetworkRx:   int64(calculated.NetworkRx),
+			NetworkTx:   int64(calculated.NetworkTx),
+			NumRestarts: restartCount,
+			Status:      c.State.Status,
+		}
+		stats.ContainersStats = append(stats.ContainersStats, procStats)
+	}
+
+	return stats, nil
+}
