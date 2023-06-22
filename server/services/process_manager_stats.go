@@ -16,4 +16,28 @@ func (pm *ProcessManager) StatsAllProcesses(sett *models.Settings) (*models.AllS
 
 	stats := &models.AllStreamProcessStats{}
 	// calculate disk usage and gather system info
-	totalContainers := systemInfo.Cont
+	totalContainers := systemInfo.Containers
+	runningContainers := systemInfo.ContainersRunning
+	stoppedContainers := systemInfo.ContainersStopped
+	totalImgSize := int64(0)
+	activeImages := 0
+	totalVolumeSize := int64(0)
+	activeVolumes := int64(0)
+
+	for _, im := range diskUsage.Images {
+		activeImages += int(im.Containers)
+		totalImgSize += im.SharedSize
+	}
+	for _, v := range diskUsage.Volumes {
+		activeVolumes += v.UsageData.RefCount
+		totalVolumeSize += v.UsageData.Size
+	}
+
+	stats.Containers = totalContainers
+	stats.ContainersRunning = runningContainers
+	stats.ContainersStopped = stoppedContainers
+	stats.ActiveImages = int(activeImages)
+	stats.TotalVolumeSize = totalVolumeSize
+	stats.TotalActiveVolumes = int(activeVolumes)
+	stats.GatewayID = sett.GatewayID
+	stats.TotalImageSize =
