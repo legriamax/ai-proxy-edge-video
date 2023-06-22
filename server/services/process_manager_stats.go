@@ -40,4 +40,35 @@ func (pm *ProcessManager) StatsAllProcesses(sett *models.Settings) (*models.AllS
 	stats.TotalVolumeSize = totalVolumeSize
 	stats.TotalActiveVolumes = int(activeVolumes)
 	stats.GatewayID = sett.GatewayID
-	stats.TotalImageSize =
+	stats.TotalImageSize = totalImgSize
+
+	stats.ContainersStats = make([]*models.ProcessStats, 0)
+
+	pList, err := pm.List()
+	if err != nil {
+		g.Log.Error("failed to list all containers", err)
+		return nil, err
+	}
+
+	// gather all container stats
+	for _, process := range pList {
+		c, err := cl.ContainerGet(process.ContainerID)
+		if err != nil {
+			g.Log.Error("failed to get container from docker system", err)
+			continue
+		}
+		n := c.Name
+		// skip default running components
+		if strings.Contains(n, "chrysedgeportal") || strings.Contains(n, "chrysedgeserver") || strings.Contains(n, "redis") {
+			continue
+		}
+
+		s, err := cl.ContainerStats(c.ID)
+		if err != nil {
+			return nil, err
+		}
+		calculated := cl.CalculateStats(s)
+		calculated.Status = c.State.Status
+		restartCount := 0
+		if c.State.ExitCode > 0 {
+			restartCount = c.Re
