@@ -7,4 +7,33 @@
 //    http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the 
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package services
+
+import (
+	g "github.com/chryscloud/video-edge-ai-proxy/globals"
+	badger "github.com/dgraph-io/badger/v2"
+)
+
+const (
+	TablePrefixRTSP = "/rtsp/"
+)
+
+// Storage - main storage functions (Get, Put, Del, List)
+type Storage struct {
+	db *badger.DB
+}
+
+func NewStorage(db *badger.DB) *Storage {
+	return &Storage{
+		db: db,
+	}
+}
+
+func (s *Storage) Put(prefix, key string, value []byte) error {
+	err := s.db.Update(func(txn *badger.Txn) error {
+		err := txn.Set([]
