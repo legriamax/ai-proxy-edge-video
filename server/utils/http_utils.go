@@ -33,4 +33,23 @@ func CallAPIWithBody(apiClient *resty.Client, method string, fullEndpoint string
 
 	req := apiClient.R().SetHeader("X-ChrysEdge-Auth", edgeKey+":"+mac).
 		SetHeader("X-Chrys-Date", current_ts).
-		SetHeader("Content-MD5", contentMD5).Set
+		SetHeader("Content-MD5", contentMD5).SetBody(body)
+	resp, sndErr := req.Execute(method, fullEndpoint)
+
+	if sndErr != nil {
+		g.Log.Error("failed to send annotations to remote api", sndErr)
+		return nil, sndErr
+	}
+	if resp.StatusCode() >= 200 && resp.StatusCode() <= 300 {
+		return resp.Body(), nil
+	}
+	if resp.StatusCode() == 403 || resp.StatusCode() == 401 {
+		g.Log.Error("invalid response code from chrysalis API: ", resp.StatusCode(), string(resp.Body()))
+		return nil, models.ErrForbidden
+	}
+	if resp.StatusCode() == 404 {
+		g.Log.Warn("chrysalis cloud cannot find gateway probably", resp.StatusCode(), string(resp.Body()))
+		return nil, models.ErrProcessNotFound
+	}
+
+	return nil, errors.New(fmt.Sprintf("invalid response code from chrysalis API: %d,
