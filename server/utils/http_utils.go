@@ -52,4 +52,5 @@ func CallAPIWithBody(apiClient *resty.Client, method string, fullEndpoint string
 		return nil, models.ErrProcessNotFound
 	}
 
-	return nil, errors.New(fmt.Sprintf("invalid response code from chrysalis API: %d,
+	return nil, errors.New(fmt.Sprintf("invalid response code from chrysalis API: %d, %v", resp.StatusCode(), string(resp.Body())))
+}
