@@ -50,4 +50,24 @@ func ImageTagToParts(imageTag string) (string, string, string) {
 	if !strings.Contains(imageTag, "/") {
 		return imageTag, "", ""
 	}
-	splitUserRegis
+	splitUserRegistry := strings.Split(imageTag, "/")
+	if len(splitUserRegistry) == 2 {
+		dockerUser := splitUserRegistry[0]
+		part2 := splitUserRegistry[1]
+		registryVersion := strings.Split(part2, ":")
+		if len(registryVersion) == 2 {
+			dockerRepository := registryVersion[0]
+			dockerVersion := registryVersion[1]
+			return dockerUser, dockerRepository, dockerVersion
+		} else {
+			return imageTag, "", ""
+		}
+	}
+
+	return imageTag, "", ""
+}
+
+// combine image parts to complete image tag string
+func ImageTagPartToString(dockerUser, dockerRepository, dockerImageVersion string) string {
+	return dockerUser + "/" + dockerRepository + ":" + dockerImageVersion
+}
