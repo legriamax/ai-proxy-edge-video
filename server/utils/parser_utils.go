@@ -23,4 +23,31 @@ func ParseRTMPKey(rtmpURL string) (string, error) {
 		return key, nil
 
 	}
-	return "", errors.New("failed to par
+	return "", errors.New("failed to parse RTMP key")
+}
+
+func StringPairsToVarPairs(stringPairs []string) []*models.VarPair {
+	varPairs := make([]*models.VarPair, 0)
+	if len(stringPairs) > 0 {
+		for _, str := range stringPairs {
+			if strings.Contains(str, "=") {
+				pair := &models.VarPair{}
+				split := strings.Split(str, "=")
+				name := split[0]
+				val := split[1]
+				pair.Name = name
+				pair.Value = val
+				varPairs = append(varPairs, pair)
+			}
+		}
+	}
+	return varPairs
+}
+
+// ImageTag to part splits the complete image tag to username, registry and version
+func ImageTagToParts(imageTag string) (string, string, string) {
+	// best effort return
+	if !strings.Contains(imageTag, "/") {
+		return imageTag, "", ""
+	}
+	splitUserRegis
