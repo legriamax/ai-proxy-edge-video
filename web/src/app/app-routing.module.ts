@@ -11,4 +11,23 @@ import { AppDetailsComponent } from './components/app-details/app-details.compon
 
 
 const routes: Routes = [
-  {path: 
+  {path: '', component: SetupComponent},
+  // {path: '', redirectTo: '/local/processes', pathMatch: 'full'},
+  {path: 'local', component: DashboardComponent, 
+    children: [
+      { path: "processes", component: ProcessesComponent},
+      { path: "process/:name", component: ProcessDetailsComponent},
+      { path: "addrtsp", component: ProcessAddComponent},
+      // { path: "applications", component: AppprocessComponent},
+      { path: "applications/:name", component: AppDetailsComponent},
+      { path: "addapp", component: AppAddComponent},
+      { path: "settings", component: SettingsComponent}
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
