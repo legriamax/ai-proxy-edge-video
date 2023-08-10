@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppC
+export class AppComponent {
+  title = 'web-edgeproxy-portal';
+}
