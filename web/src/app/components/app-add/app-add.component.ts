@@ -107,3 +107,84 @@ export class AppAddComponent implements OnInit {
 
   downloadApp(app:AppProcess, tag:string,version:string, title:string, message:string) {
     const dialogReg = this.dialog.open(WaitDialogComponent, {
+      maxWidth: "400px",
+      disableClose: true,
+      data: {
+        title: title,
+        message: message
+      }
+    });
+
+    console.log("inspect app: ", app);
+
+    this.edgeService.pullDockerImage(tag, version).subscribe(pullData => {
+      this.loadingMessage = pullData.response;
+      // popup  window with Next button
+      console.log("pulled successfully: ", pullData);
+      this.startApp(app);
+      dialogReg.close();
+    }, pullErr => {
+      dialogReg.close();
+      console.error(pullErr);
+      this.loadingMessage = pullErr
+      
+      this.notifService.error("Please execute this command in your terminal: docker pull " + tag +  ":" + version );
+    });
+
+  }
+
+  startApp(app:AppProcess) {
+    const dialogReg = this.dialog.open(WaitDialogComponent, {
+      maxWidth: "400px",
+      disableClose: true,
+      data: {
+        title: "Install",
+        message: "Starting the app"
+      }
+    });
+
+    this.edgeService.installApp(app).subscribe(resp => {
+      
+      dialogReg.close();
+      this.router.navigate(['/local/processes'],  { queryParams: {tab: 1}});
+
+    }, error => {
+      console.log(error);
+      dialogReg.close();
+      this.loadingMessage = error.message;
+      this.notifService.error("Start failed");
+    })
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (!this.appForm.valid) {
+      return
+    }
+
+    let app:AppProcess = this.appForm.value;
+
+    let imageTag = app.docker_repository
+    let imageVersion = app.docker_version
+    if (app.docker_user) {
+      imageTag = app.docker_user + "/" + imageTag
+    }
+
+    // // convert to ints from form strings
+    if (app.port_mappings) {
+      let portMappings:PortMap[] = [];
+      app.port_mappings.forEach(pm => {
+        let portMap:PortMap = {
+          exposed: Number(pm.exposed),
+          map_to: Number(pm.map_to),
+        }
+        portMappings.push(portMap);
+      });
+      app.port_mappings = portMappings;
+    }
+    
+    this.downloadApp(app,imageTag, imageVersion, "Downloading app", "Do not close this browser window. This may take a while. Please wait...")
+
+  }
+
+}
