@@ -38,4 +38,28 @@ import { AppDetailsComponent } from './components/app-details/app-details.compon
     NotifyDialogComponent,
     WaitDialogComponent,
     AppAddComponent,
-  
+    AppDetailsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AngularMaterialModule,
+    AppRoutingModule,
+    FlexLayoutModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
+  ],
+  providers: [
+    CookieService,
+    LoaderService,
+    {provide: HTTP_INTERCEPTORS, useClass: ChrysHttpInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule { }
