@@ -28,4 +28,20 @@
               <mat-list-item>
                 <mat-icon mat-list-icon>schedule</mat-icon>
                 <div mat-line>Created</div>
-                <div mat-
+                <div mat-line>{{process?.created | date:'short'}}</div>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon>schedule</mat-icon>
+                <div mat-line>Modified</div>
+                <div mat-line>{{process?.modified | date:'short'}}</div>
+              </mat-list-item>
+            </mat-list>
+              <mat-list>
+                <div mat-subheader>Process</div>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>label</mat-icon>
+                  <div mat-line>Docker Image</div>
+                  <div mat-line>{{process?.docker_user}}/{{process?.docker_repository}}:{{process?.docker_version}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                  <m
