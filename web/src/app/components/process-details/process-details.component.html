@@ -48,4 +48,20 @@
                   <div mat-line>RTMP Endpoint</div>
                   <div mat-line style="white-space: unset; max-width: 400px;">{{process?.rtmp_endpoint}}</div>
                 </mat-list-item>
-                <mat-list-ite
+                <mat-list-item>
+                  <mat-icon mat-list-icon>data_usage</mat-icon>
+                  <div mat-line>RTMP Proxy Streaming</div>
+                  <div mat-line>{{process?.rtmp_stream_status?.streaming}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>storage</mat-icon>
+                  <div mat-line>Cloud Storage Enabled</div>
+                  <div mat-line>{{process?.rtmp_stream_status?.storing}}</div>
+                </mat-list-item>
+              </mat-list>
+              <mat-list>
+                <div mat-subheader>Process</div>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>label</mat-icon>
+                  <div mat-line>Docker Image</div>
+                  
