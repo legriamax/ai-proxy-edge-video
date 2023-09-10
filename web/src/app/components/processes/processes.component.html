@@ -68,4 +68,14 @@
          <ng-container matColumnDef="name">
            <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
            <mat-cell *matCellDef="let row"> {{row.image_tag}} </mat-cell>
-         <
+         </ng-container>
+       
+         <!-- Upgrade available -->
+         <ng-container matColumnDef="newer_version">
+           <mat-header-cell *matHeaderCellDef> Upgrade available </mat-header-cell>
+           <mat-cell *matCellDef="let row" [ngClass]="{ 'chrys-warn' : row.upgrade_available }"> {{row.newer_version}} &nbsp; <mat-progress-bar *ngIf="row.upgrading_now" style="width: 50px;" mode="indeterminate"></mat-progress-bar> </mat-cell>
+         </ng-container>
+       
+         <ng-container matColumnDef="status">
+           <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+           <mat-cell *matCellDef="let row" [ngClass]="{ 'chrys-error' : row.s
