@@ -36,4 +36,19 @@
           <div *ngIf="selection.selected.length > 0" class="table-action-buttons">
            <button mat-raised-button color="accent" (click)="upgrade()" [disabled]="disabledUpgradeButton">Upgrade Now</button>
            &nbsp;&nbsp;
-           <a href="https://github.com/chryscloud/video-edg
+           <a href="https://github.com/chryscloud/video-edge-ai-proxy/releases" target="_blank" mat-stroked-button color="primary">About Upgrades</a>
+          </div>
+          
+        <mat-table [dataSource]="processes" class="mat-elevation-z1">
+       
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+           <mat-header-cell *matHeaderCellDef>
+             <mat-checkbox (change)="$event ? selectToggle() : null"
+                           [checked]="selection.hasValue() && isAllUpgradesSelected()"
+                           [indeterminate]="selection.hasValue() && !isAllUpgradesSelected()">
+             </mat-checkbox>
+           </mat-header-cell>
+           <mat-cell *matCellDef="let row">
+             <mat-checkbox (click)="$event.stopPropagation()"
+         
