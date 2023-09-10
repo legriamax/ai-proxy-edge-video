@@ -51,4 +51,21 @@
            </mat-header-cell>
            <mat-cell *matCellDef="let row">
              <mat-checkbox (click)="$event.stopPropagation()"
-         
+                           (change)="$event ? selection.toggle(row) : null"
+                           [checked]="selection.isSelected(row)"
+                           [disabled]="!row.upgrade_available">
+             </mat-checkbox>
+           </mat-cell>
+         </ng-container>
+       
+         <!-- Container Name -->
+         <ng-container matColumnDef="id">
+           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+           <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+         </ng-container>
+       
+         <!-- Image Name -->
+         <ng-container matColumnDef="name">
+           <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+           <mat-cell *matCellDef="let row"> {{row.image_tag}} </mat-cell>
+         <
