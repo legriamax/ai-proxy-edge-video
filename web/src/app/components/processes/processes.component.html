@@ -78,4 +78,19 @@
        
          <ng-container matColumnDef="status">
            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-           <mat-cell *matCellDef="let row" [ngClass]="{ 'chrys-error' : row.s
+           <mat-cell *matCellDef="let row" [ngClass]="{ 'chrys-error' : row.status === 'restarting' }"> {{row.status}} </mat-cell>
+         </ng-container>
+       
+         <ng-container matColumnDef="created">
+           <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+           <mat-cell *matCellDef="let row"> {{row.created | date:'short'}} </mat-cell>
+         </ng-container>
+       
+         <ng-container matColumnDef="modified">
+           <mat-header-cell *matHeaderCellDef> Modified </mat-header-cell>
+           <mat-cell *matCellDef="let row"> {{row.modified | date:'short'}} </mat-cell>
+         </ng-container>
+       
+         <!-- Disclaimer column -->
+         <ng-container matColumnDef="disclaimer">
+           <td mat-footer-cell *matFooterCellDef colspan="4" class="mat-bo
