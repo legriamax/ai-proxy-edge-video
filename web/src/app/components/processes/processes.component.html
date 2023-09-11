@@ -93,4 +93,20 @@
        
          <!-- Disclaimer column -->
          <ng-container matColumnDef="disclaimer">
-           <td mat-footer-cell *matFooterCellDef colspan="4" class="mat-bo
+           <td mat-footer-cell *matFooterCellDef colspan="4" class="mat-body" style="vertical-align: middle;">
+             <i>Please note that only you can stream only 1 camera to the Chrysalis cloud in your trial period.</i>
+           </td>
+         </ng-container>
+       
+         <!-- Header and Row Declarations -->
+         <mat-header-row *matHeaderRowDef="['select','id', 'name', 'newer_version', 'status','created', 'modified']"></mat-header-row>
+         <mat-row *matRowDef="let row; columns: ['select', 'id', 'name', 'newer_version','status', 'created','modified']" [routerLink]="['/local/process/',row.name]"></mat-row>
+         
+       </mat-table>
+       </div>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Applications">
+      <div class="example-large-box mat-elevation-z4">
+        <div 
