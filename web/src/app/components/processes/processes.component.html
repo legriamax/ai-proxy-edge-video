@@ -122,4 +122,20 @@
         </div>
 
         <div *ngIf="showApps">
+          <mat-table [dataSource]="apps" class="mat-elevation-z1">
+       
+            <!-- Container Name -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+            </ng-container>
           
+            <!-- Image Name -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.docker_user}}/{{row.docker_repository}}:{{row.docker_version}} </mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matC
