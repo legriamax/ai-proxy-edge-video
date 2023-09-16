@@ -23,4 +23,19 @@
                 <span *ngIf="settings.gateway_id">Edge/Gateway is configured with ID <b>{{settings.gateway_id}}</b></span>
                 <span *ngIf="!settings.gateway_id">Edge API configuration</span>
 
-   
+                <form [formGroup]="settingsForm">
+                    <p>
+                        <mat-error *ngIf="errorMessage">
+                            {{errorMessage}}
+                        </mat-error>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="fill" fxFlex="100%">
+                            <mat-label>Edge API Key</mat-label>
+                            <input matInput formControlName="edge_key" value="{{settings.edge_key}}">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="fill" fxFlex="100%">
+                            <mat-label>Edge API Secret</mat-label>
+                            <input matInput [type]="showEdgeKey ? 'text' : 'passwo
