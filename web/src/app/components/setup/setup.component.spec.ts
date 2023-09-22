@@ -16,3 +16,11 @@ describe('SetupComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SetupComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
