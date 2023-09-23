@@ -63,4 +63,23 @@ export class SetupComponent implements OnInit, OnDestroy {
     this.initialSetup();
 
     this.imageUpgrade$.subscribe(data => {
-   
+      this.gotResponses += 1;
+      this.imageUpgrades.push(data);
+      if (this.gotResponses == this.expectedResponses) {
+        // close dialog, choose which option to proceed with
+        dialogRef.close();
+
+        if (!data.has_upgrade && data.has_image) {
+
+          // no upgrades, latest version available
+          this.router.navigate(['/local/processes']);
+        } else if (!data.has_upgrade && !data.has_image) {
+
+          // no images found...initial setup
+          this.title = "Initial setup. Please choose a camera type to install";
+        } else if (data.has_image && data.has_upgrade) {
+
+          // upgrade available
+          this.title = "Upgrade available";
+          const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            maxWidt
