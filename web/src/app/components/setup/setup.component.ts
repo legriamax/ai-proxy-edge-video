@@ -37,4 +37,30 @@ export class SetupComponent implements OnInit, OnDestroy {
 
   private _mobileQueryListener: () => void;
 
- 
+  constructor(changeDetectorRef: ChangeDetectorRef, 
+      media: MediaMatcher,
+      private router:Router, 
+      private edgeService:EdgeService,  
+      private notifService:NotificationsService,
+      public dialog:MatDialog) { 
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
+  }
+
+  ngOnInit(): void {
+
+    const dialogRef = this.dialog.open(WaitDialogComponent, {
+      maxWidth: "400px",
+      disableClose: true,
+      data: {
+          title: "Please wait...",
+          message: "Checking for updates"}
+      });
+
+    this.initialSetup();
+
+    this.imageUpgrade$.subscribe(data => {
+   
