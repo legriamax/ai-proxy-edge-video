@@ -93,4 +93,29 @@ export class SetupComponent implements OnInit, OnDestroy {
               // if user pressed yes dialogResult will be true, 
               // if he pressed no - it will be false
               if (dialogResult) {
-                this.pullImage(data, "Please wait ...", "Do not close this window until upgrade finishes.
+                this.pullImage(data, "Please wait ...", "Do not close this window until upgrade finishes.");
+              } else {
+                // no upgrading - proceed to camera list view
+                this.router.navigate(['/local/processes']);      
+              }
+            });
+        }
+      }
+    });
+  }
+
+  clickRTSP() {
+    let rtspImage = GlobalVars.CameraTypes.get("rtsp");
+    console.log("rtspImage from global vars: ", rtspImage);
+    
+    let found = false;
+    this.imageUpgrades.forEach(upgrade => {
+        if (upgrade.name == rtspImage) {
+          found = true;
+          this.pullImage(upgrade, "Downloading RTSP camera container","Please wait. This may take a few minutes.");
+        }
+    });
+    
+    if (!found) {
+      console.error("failed to find a docker image when doing continer upgrade", rtspImage, GlobalVars.CameraTypes);
+      this.notifServi
