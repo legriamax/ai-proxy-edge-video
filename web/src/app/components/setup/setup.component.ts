@@ -146,4 +146,28 @@ export class SetupComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.edgeService.pullDockerImage(data.name, data.highest_remote_version).subscr
+    this.edgeService.pullDockerImage(data.name, data.highest_remote_version).subscribe(pullData => {
+      this.loadingMessage = pullData.response;
+      // popup  window with Next button
+      this.router.navigate(['/local/processes']);     
+      dialogReg.close();
+    }, pullErr => {
+      dialogReg.close();
+      console.error(pullErr);
+      this.loadingMessage = pullErr
+      this.loading = false;
+      this.notifService.error("Please execute this command in your terminal: docker pull " + data.name +  ":" + data.highest_remote_version );
+    });
+
+  }
+
+  openDialog(title:string, message:string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    maxWidth: "400px",
+    data: {
+        title: title,
+        message: message}
+    });
+
+    // listen to response
+    dialogRef.afterClosed().subsc
