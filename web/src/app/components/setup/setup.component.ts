@@ -118,4 +118,32 @@ export class SetupComponent implements OnInit, OnDestroy {
     
     if (!found) {
       console.error("failed to find a docker image when doing continer upgrade", rtspImage, GlobalVars.CameraTypes);
-      this.notifServi
+      this.notifService.error("Failed to find the right container image. Try hard refreshing.");
+    }
+  }
+
+  initialSetup() {
+    this.expectedResponses = GlobalVars.CameraTypes.size;
+
+    GlobalVars.CameraTypes.forEach((value,key) => {
+      console.log(key,value);
+      this.edgeService.getDeviceDockerImages(value).subscribe(data => {
+        this.imageUpgrade.next(data);
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  pullImage(data:ImageUpgrade, title:string, message:string) {
+    const dialogReg = this.dialog.open(WaitDialogComponent, {
+      maxWidth: "400px",
+      data: {
+        title: title,
+        message: message
+      }
+    });
+
+    this.edgeService.pullDockerImage(data.name, data.highest_remote_version).subscr
