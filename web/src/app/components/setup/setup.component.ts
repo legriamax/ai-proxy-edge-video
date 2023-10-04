@@ -82,4 +82,15 @@ export class SetupComponent implements OnInit, OnDestroy {
           // upgrade available
           this.title = "Upgrade available";
           const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-            maxWidt
+            maxWidth: "400px",
+            data: {
+                title: "New version for RTSP cameras available " + data.highest_remote_version,
+                message: "Would you like to download newer version of RTSP camera images? Updates may contain some upgrades and/or bug fixes. Your camera operations are not affected by this process. It's just a download."}
+            });
+        
+            // upgrade yes/no
+            dialogRef.afterClosed().subscribe(dialogResult => {
+              // if user pressed yes dialogResult will be true, 
+              // if he pressed no - it will be false
+              if (dialogResult) {
+                this.pullImage(data, "Please wait ...", "Do not close this window until upgrade finishes.
