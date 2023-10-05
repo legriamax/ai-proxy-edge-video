@@ -170,4 +170,14 @@ export class SetupComponent implements OnInit, OnDestroy {
     });
 
     // listen to response
-    dialogRef.afterClosed().subsc
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      // if user pressed yes dialogResult will be true, 
+      // if he pressed no - it will be false
+      if (dialogResult) {
+        this.loading = false;
+        this.router.navigate(['/local/processes']);
+      }
+    });
+  }
+
+}
