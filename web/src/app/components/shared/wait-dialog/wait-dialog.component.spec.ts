@@ -6,4 +6,20 @@ describe('WaitDialogComponent', () => {
   let component: WaitDialogComponent;
   let fixture: ComponentFixture<WaitDialogComponent>;
 
-  beforeEach(async(() 
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ WaitDialogComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(WaitDialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
