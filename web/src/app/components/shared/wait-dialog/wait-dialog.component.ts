@@ -7,4 +7,12 @@ import { DialogData } from '../dialog-data';
   templateUrl: './wait-dialog.component.html',
   styleUrls: ['./wait-dialog.component.scss']
 })
-export class WaitDialogComponent im
+export class WaitDialogComponent implements OnInit {
+
+  constructor(public dialogRef: MatDialogRef<WaitDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  ngOnInit(): void {
+  }
+
+}
