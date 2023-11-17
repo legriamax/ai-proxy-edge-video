@@ -35,4 +35,6 @@ export interface RTMPStreamStatus {
 }
 
 export interface Logs {
-    stdout?:strin
+    stdout?:string
+    stderr?:string
+}
