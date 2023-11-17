@@ -12,4 +12,5 @@ export interface DockerImageSummary {
     Size?:number,
     RepoTags?:[string],
     Labels?:Map<string,string>,
-    ParentID?:str
+    ParentID?:string,
+}
