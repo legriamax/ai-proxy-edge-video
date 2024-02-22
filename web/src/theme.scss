@@ -27,4 +27,40 @@ $chrysalis-primary-color: (
         500 : #ffffff,
         600 : #ffffff,
         700 : #ffffff,
-        800 :
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #ffffff,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$chrysalis-accent-color: (
+    50 : #e4e5e5,
+    100 : #bcbebf,
+    200 : #909294,
+    300 : #646669,
+    400 : #424649,
+    500 : #212529,
+    600 : #1d2124,
+    700 : #181b1f,
+    800 : #141619,
+    900 : #0b0d0f,
+    A100 : #55aaff,
+    A200 : #2290ff,
+    A400 : #0077ee,
+    A700 : #006ad4,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+      
