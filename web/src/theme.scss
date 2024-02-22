@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+// @include mat-core();
+
+/* ======== Angular material custom themes ======== */  
+
+$chrysalis-primary-color: (
+    50 : #e3e2e6,
+    100 : #b8b6c0,
+    200 : #898596,
+    300 : #59546c,
+    400 : #36304d,
+    500 : #120b2d,
+    600 : #100a28,
+    700 : #0d0822,
+    800 : #0a061c,
+    900 : #050311,
+    A100 : #7052ff,
+    A200 : #451fff,
+    A400 : #2800eb,
+    A700 : #2300d2,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 :
