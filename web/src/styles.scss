@@ -17,4 +17,39 @@ body { margin: 0; }
 }
 
 .docs-aiexamples-category-list-item {
-    te
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px;
+    vertical-align: top;
+    width: 280px;
+}
+
+.docs-aiexamples-list-card {
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #ffffff;
+}
+
+.docs-aiexamples-category-list-card-image-wrapper {
+    height: 156px;
+    background-size: cover;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.docs-aiexamples-category-list-card-title {
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.docs-aiexamples-category-list-card-summary {
+    padding: 0 15px 15px;
+    min-height: 2.4em;
+    font-size: 15px;
+    color: #000000;
+}
+
+.chrys-error
