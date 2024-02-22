@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'xterm.css';
+
+html, body { height: 100%; }
+body { margin: 0; }
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .docs-aiexamples-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+    position: relative;
+}
+
+.docs-aiexamples-category-list-item {
+    te
