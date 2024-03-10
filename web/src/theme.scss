@@ -119,4 +119,19 @@ $my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-cus
 // `headlines` and `body-1` levels.
 $custom-typography: mat-typography-config(
   $font-family:     'Open Sans, sans-serif, Roboto,monospace',
-  $title:           mat-typography-level(20px, 
+  $title:           mat-typography-level(20px, 32px, 500),
+  $headline:        mat-typography-level(32px, 48px, 700),
+  $body-1:          mat-typography-level(14px, 24px, 500),
+  $display-4:       mat-typography-level(112px, 112px, normal), // h4
+  $display-3:       mat-typography-level(48px, 0, 400), // h3
+  $display-2:       mat-typography-level(60px, -0.5, 400), // h2
+  $display-1:       mat-typography-level(96px, -1.5, 400), // h1
+  $body-2:          mat-typography-level(14px, 24px, 500),
+  $caption:         mat-typography-level(12px, 20px, 400),
+  $button:          mat-typography-level(14px, 14px, normal),
+  $input:           mat-typography-level(14px, 1, normal)
+);
+
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($custom-typography);
+
