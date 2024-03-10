@@ -135,3 +135,37 @@ $custom-typography: mat-typography-config(
 // Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
 @include mat-base-typography($custom-typography);
 
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+mat-card {
+    margin: 10px;
+}
+
+// Custom style for my anchor elements
+a {
+    // color: mat-color($my-custom-primary);
+    color: #4732FF;
+}
+
+.logo {
+    display: block;
+    max-width:300px;
+    max-height:240px;
+    width: auto;
+    height: auto;
+}
+
+.color-primary-background {
+    background: mat-color($chrysalis-primary-color);
+}
+
+@media (max-width: 600px) {
+    mat-toolbar {
+        flex-direction: row-reverse !important;
+    }
+}
+
