@@ -5,3 +5,762 @@
  * https://github.com/chjj/term.js
  * @license MIT
  *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Originally forked from (with the author's permission):
+ *   Fabrice Bellard's javascript vt100 for jslinux:
+ *   http://bellard.org/jslinux/
+ *   Copyright (c) 2011 Fabrice Bellard
+ *   The original design remains. The terminal itself
+ *   has been extended to include xterm CSI codes, among
+ *   other features.
+ */
+
+/**
+ *  Default styles for xterm.js
+ */
+
+ .xterm {
+    font-feature-settings: "liga" 0;
+    position: relative;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.xterm.focus,
+.xterm:focus {
+    outline: none;
+}
+
+.xterm .xterm-helpers {
+    position: absolute;
+    top: 0;
+    /**
+     * The z-index of the helpers must be higher than the canvases in order for
+     * IMEs to appear on top.
+     */
+    z-index: 5;
+}
+
+.xterm .xterm-helper-textarea {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    /* Move textarea out of the screen to the far left, so that the cursor is not visible */
+    position: absolute;
+    opacity: 0;
+    left: -9999em;
+    top: 0;
+    width: 0;
+    height: 0;
+    z-index: -5;
+    /** Prevent wrapping so the IME appears against the textarea at the correct position */
+    white-space: nowrap;
+    overflow: hidden;
+    resize: none;
+}
+
+.xterm .composition-view {
+    /* TODO: Composition position got messed up somewhere */
+    background: #000;
+    color: #FFF;
+    display: none;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.xterm .composition-view.active {
+    display: block;
+}
+
+.xterm .xterm-viewport {
+    /* On OS X this is required in order for the scroll bar to appear fully opaque */
+    background-color: #000;
+    overflow-y: scroll;
+    cursor: default;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.xterm .xterm-screen {
+    position: relative;
+}
+
+.xterm .xterm-screen canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.xterm .xterm-scroll-area {
+    visibility: hidden;
+}
+
+.xterm-char-measure-element {
+    display: inline-block;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: -9999em;
+    line-height: normal;
+}
+
+.xterm {
+    cursor: text;
+}
+
+.xterm.enable-mouse-events {
+    /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
+    cursor: default;
+}
+
+.xterm.xterm-cursor-pointer {
+    cursor: pointer;
+}
+
+.xterm.column-select.focus {
+    /* Column selection mode */
+    cursor: crosshair;
+}
+
+.xterm .xterm-accessibility,
+.xterm .xterm-message {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    color: transparent;
+}
+
+.xterm .live-region {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.xterm-dim {
+    opacity: 0.5;
+}
+
+.xterm-underline {
+    text-decoration: underline;
+}
+
+/**
+ * xterm.js: xterm, in the browser
+ * Copyright (c) 2014-2016, SourceLair Private Company (www.sourcelair.com (MIT License)
+ * Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
+ * https://github.com/chjj/term.js
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Originally forked from (with the author's permission):
+ *   Fabrice Bellard's javascript vt100 for jslinux:
+ *   http://bellard.org/jslinux/
+ *   Copyright (c) 2011 Fabrice Bellard
+ *   The original design remains. The terminal itself
+ *   has been extended to include xterm CSI codes, among
+ *   other features.
+ */
+
+/*
+ *  Default style for xterm.js
+ */
+
+ .terminal {
+    background-color: #000;
+    color: #fff;
+    font-family: courier-new, courier, monospace;
+    font-feature-settings: "liga" 0;
+    position: relative;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.terminal.focus,
+.terminal:focus {
+    outline: none;
+}
+
+.terminal .xterm-helpers {
+    position: absolute;
+    top: 0;
+}
+
+.terminal .xterm-helper-textarea {
+    /*
+     * HACK: to fix IE's blinking cursor
+     * Move textarea out of the screen to the far left, so that the cursor is not visible.
+     */
+    position: absolute;
+    opacity: 0;
+    left: -9999em;
+    top: 0;
+    width: 0;
+    height: 0;
+    z-index: -10;
+    /** Prevent wrapping so the IME appears against the textarea at the correct position */
+    white-space: nowrap;
+    overflow: hidden;
+    resize: none;
+}
+
+.terminal a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.terminal a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.terminal a.xterm-invalid-link:hover {
+    cursor: text;
+    text-decoration: none;
+}
+
+.terminal.focus:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar) .terminal-cursor {
+    background-color: #fff;
+    color: #000;
+}
+
+.terminal:not(.focus) .terminal-cursor {
+    outline: 1px solid #fff;
+    outline-offset: -1px;
+    background-color: transparent;
+}
+
+.terminal:not(.xterm-cursor-style-underline):not(.xterm-cursor-style-bar).focus.xterm-cursor-blink-on .terminal-cursor {
+    background-color: transparent;
+    color: inherit;
+}
+
+.terminal.xterm-cursor-style-bar .terminal-cursor,
+.terminal.xterm-cursor-style-underline .terminal-cursor {
+    position: relative;
+}
+.terminal.xterm-cursor-style-bar .terminal-cursor::before,
+.terminal.xterm-cursor-style-underline .terminal-cursor::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #fff;
+}
+.terminal.xterm-cursor-style-bar .terminal-cursor::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+}
+.terminal.xterm-cursor-style-underline .terminal-cursor::before {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+}
+.terminal.xterm-cursor-style-bar.focus.xterm-cursor-blink.xterm-cursor-blink-on .terminal-cursor::before,
+.terminal.xterm-cursor-style-underline.focus.xterm-cursor-blink.xterm-cursor-blink-on .terminal-cursor::before {
+    background-color: transparent;
+}
+.terminal.xterm-cursor-style-bar.focus.xterm-cursor-blink .terminal-cursor::before,
+.terminal.xterm-cursor-style-underline.focus.xterm-cursor-blink .terminal-cursor::before {
+    background-color: #fff;
+}
+
+.terminal .composition-view {
+    background: #000;
+    color: #FFF;
+    display: none;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.terminal .composition-view.active {
+    display: block;
+}
+
+.terminal .xterm-viewport {
+    /* On OS X this is required in order for the scroll bar to appear fully opaque */
+    background-color: #000;
+    overflow-y: scroll;
+}
+
+.terminal .xterm-wide-char,
+.terminal .xterm-normal-char {
+    display: inline-block;
+}
+
+.terminal .xterm-rows {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.terminal .xterm-rows > div {
+    /* Lines containing spans and text nodes ocassionally wrap despite being the same width (#327) */
+    white-space: nowrap;
+}
+
+.terminal .xterm-scroll-area {
+    visibility: hidden;
+}
+
+.terminal .xterm-char-measure-element {
+    display: inline-block;
+    visibility: hidden;
+    position: absolute;
+    left: -9999em;
+}
+
+.terminal.enable-mouse-events {
+    /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
+    cursor: default;
+}
+
+.terminal .xterm-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.terminal .xterm-selection div {
+    position: absolute;
+    background-color: #fff;
+}
+
+/*
+ *  Determine default colors for xterm.js
+ */
+.terminal .xterm-bold {
+    font-weight: bold;
+}
+
+.terminal .xterm-underline {
+    text-decoration: underline;
+}
+
+.terminal .xterm-blink {
+    text-decoration: blink;
+}
+
+.terminal .xterm-hidden {
+    visibility: hidden;
+}
+
+.terminal .xterm-color-0 {
+    color: #2e3436;
+}
+
+.terminal .xterm-bg-color-0 {
+    background-color: #2e3436;
+}
+
+.terminal .xterm-color-1 {
+    color: #cc0000;
+}
+
+.terminal .xterm-bg-color-1 {
+    background-color: #cc0000;
+}
+
+.terminal .xterm-color-2 {
+    color: #4e9a06;
+}
+
+.terminal .xterm-bg-color-2 {
+    background-color: #4e9a06;
+}
+
+.terminal .xterm-color-3 {
+    color: #c4a000;
+}
+
+.terminal .xterm-bg-color-3 {
+    background-color: #c4a000;
+}
+
+.terminal .xterm-color-4 {
+    color: #3465a4;
+}
+
+.terminal .xterm-bg-color-4 {
+    background-color: #3465a4;
+}
+
+.terminal .xterm-color-5 {
+    color: #75507b;
+}
+
+.terminal .xterm-bg-color-5 {
+    background-color: #75507b;
+}
+
+.terminal .xterm-color-6 {
+    color: #06989a;
+}
+
+.terminal .xterm-bg-color-6 {
+    background-color: #06989a;
+}
+
+.terminal .xterm-color-7 {
+    color: #d3d7cf;
+}
+
+.terminal .xterm-bg-color-7 {
+    background-color: #d3d7cf;
+}
+
+.terminal .xterm-color-8 {
+    color: #555753;
+}
+
+.terminal .xterm-bg-color-8 {
+    background-color: #555753;
+}
+
+.terminal .xterm-color-9 {
+    color: #ef2929;
+}
+
+.terminal .xterm-bg-color-9 {
+    background-color: #ef2929;
+}
+
+.terminal .xterm-color-10 {
+    color: #8ae234;
+}
+
+.terminal .xterm-bg-color-10 {
+    background-color: #8ae234;
+}
+
+.terminal .xterm-color-11 {
+    color: #fce94f;
+}
+
+.terminal .xterm-bg-color-11 {
+    background-color: #fce94f;
+}
+
+.terminal .xterm-color-12 {
+    color: #729fcf;
+}
+
+.terminal .xterm-bg-color-12 {
+    background-color: #729fcf;
+}
+
+.terminal .xterm-color-13 {
+    color: #ad7fa8;
+}
+
+.terminal .xterm-bg-color-13 {
+    background-color: #ad7fa8;
+}
+
+.terminal .xterm-color-14 {
+    color: #34e2e2;
+}
+
+.terminal .xterm-bg-color-14 {
+    background-color: #34e2e2;
+}
+
+.terminal .xterm-color-15 {
+    color: #eeeeec;
+}
+
+.terminal .xterm-bg-color-15 {
+    background-color: #eeeeec;
+}
+
+.terminal .xterm-color-16 {
+    color: #000000;
+}
+
+.terminal .xterm-bg-color-16 {
+    background-color: #000000;
+}
+
+.terminal .xterm-color-17 {
+    color: #00005f;
+}
+
+.terminal .xterm-bg-color-17 {
+    background-color: #00005f;
+}
+
+.terminal .xterm-color-18 {
+    color: #000087;
+}
+
+.terminal .xterm-bg-color-18 {
+    background-color: #000087;
+}
+
+.terminal .xterm-color-19 {
+    color: #0000af;
+}
+
+.terminal .xterm-bg-color-19 {
+    background-color: #0000af;
+}
+
+.terminal .xterm-color-20 {
+    color: #0000d7;
+}
+
+.terminal .xterm-bg-color-20 {
+    background-color: #0000d7;
+}
+
+.terminal .xterm-color-21 {
+    color: #0000ff;
+}
+
+.terminal .xterm-bg-color-21 {
+    background-color: #0000ff;
+}
+
+.terminal .xterm-color-22 {
+    color: #005f00;
+}
+
+.terminal .xterm-bg-color-22 {
+    background-color: #005f00;
+}
+
+.terminal .xterm-color-23 {
+    color: #005f5f;
+}
+
+.terminal .xterm-bg-color-23 {
+    background-color: #005f5f;
+}
+
+.terminal .xterm-color-24 {
+    color: #005f87;
+}
+
+.terminal .xterm-bg-color-24 {
+    background-color: #005f87;
+}
+
+.terminal .xterm-color-25 {
+    color: #005faf;
+}
+
+.terminal .xterm-bg-color-25 {
+    background-color: #005faf;
+}
+
+.terminal .xterm-color-26 {
+    color: #005fd7;
+}
+
+.terminal .xterm-bg-color-26 {
+    background-color: #005fd7;
+}
+
+.terminal .xterm-color-27 {
+    color: #005fff;
+}
+
+.terminal .xterm-bg-color-27 {
+    background-color: #005fff;
+}
+
+.terminal .xterm-color-28 {
+    color: #008700;
+}
+
+.terminal .xterm-bg-color-28 {
+    background-color: #008700;
+}
+
+.terminal .xterm-color-29 {
+    color: #00875f;
+}
+
+.terminal .xterm-bg-color-29 {
+    background-color: #00875f;
+}
+
+.terminal .xterm-color-30 {
+    color: #008787;
+}
+
+.terminal .xterm-bg-color-30 {
+    background-color: #008787;
+}
+
+.terminal .xterm-color-31 {
+    color: #0087af;
+}
+
+.terminal .xterm-bg-color-31 {
+    background-color: #0087af;
+}
+
+.terminal .xterm-color-32 {
+    color: #0087d7;
+}
+
+.terminal .xterm-bg-color-32 {
+    background-color: #0087d7;
+}
+
+.terminal .xterm-color-33 {
+    color: #0087ff;
+}
+
+.terminal .xterm-bg-color-33 {
+    background-color: #0087ff;
+}
+
+.terminal .xterm-color-34 {
+    color: #00af00;
+}
+
+.terminal .xterm-bg-color-34 {
+    background-color: #00af00;
+}
+
+.terminal .xterm-color-35 {
+    color: #00af5f;
+}
+
+.terminal .xterm-bg-color-35 {
+    background-color: #00af5f;
+}
+
+.terminal .xterm-color-36 {
+    color: #00af87;
+}
+
+.terminal .xterm-bg-color-36 {
+    background-color: #00af87;
+}
+
+.terminal .xterm-color-37 {
+    color: #00afaf;
+}
+
+.terminal .xterm-bg-color-37 {
+    background-color: #00afaf;
+}
+
+.terminal .xterm-color-38 {
+    color: #00afd7;
+}
+
+.terminal .xterm-bg-color-38 {
+    background-color: #00afd7;
+}
+
+.terminal .xterm-color-39 {
+    color: #00afff;
+}
+
+.terminal .xterm-bg-color-39 {
+    background-color: #00afff;
+}
+
+.terminal .xterm-color-40 {
+    color: #00d700;
+}
+
+.terminal .xterm-bg-color-40 {
+    background-color: #00d700;
+}
+
+.terminal .xterm-color-41 {
+    color: #00d75f;
+}
+
+.terminal .xterm-bg-color-41 {
+    background-color: #00d75f;
+}
+
+.terminal .xterm-color-42 {
+    color: #00d787;
+}
+
+.terminal .xterm-bg-color-42 {
+    background-color: #00d787;
+}
+
+.terminal .xterm-color-43 {
+    color: #00d7af;
+}
+
+.terminal .xterm-bg-color-43 {
+    background-color: #00d7af;
+}
+
+.terminal .xterm-color-44 {
+    color: #00d7d7;
+}
+
+.terminal .xterm-bg-color-44 {
+    background-color: #00d7d7;
+}
+
+.terminal .xterm-color-45 {
+    color: #00d7ff;
+}
+
+.terminal .xterm-bg-color-45 {
+    background-color: #00d7ff;
+}
+
+.terminal .xterm-color-46 {
+    color: #00ff00;
